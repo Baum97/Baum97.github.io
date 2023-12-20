@@ -1,0 +1,16 @@
+@neumorphic-background: #e0e0e0;
+@neumorphic-box-shadow: inset 8px 8px 16px #c4c4c4, inset -8px -8px 16px #ffffff;
+
+// Apply neumorphic styling to a button
+.neumorphic-button {
+  background-color: @neumorphic-background;
+  box-shadow: @neumorphic-box-shadow;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: inset 6px 6px 12px #c4c4c4, inset -6px -6px 12px #ffffff;
+  }
+}

@@ -1,0 +1,15 @@
+<p>article-array works!</p>
+<mat-grid-list cols="{{articles}}/4" rowHeight="200px">
+  <mat-grid-tile
+    *ngFor="let article of articles"
+    [colspan]="article.cols"
+    [rowspan]="article.rows"
+    [style.background]="article.color">{{article.text}}
+    {{article.image}}
+    {{article.name}}
+    {{article.description}}
+    {{article.price}}
+  </mat-grid-tile>
+
+</mat-grid-list>
+
