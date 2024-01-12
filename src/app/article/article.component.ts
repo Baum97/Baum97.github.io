@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Article} from './article.model'
 import {Observer} from "rxjs";
 
 @Component({
@@ -6,23 +7,8 @@ import {Observer} from "rxjs";
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.less']
 })
-export class ArticleComponent implements OnInit {
 
-  constructor()
-  {
-    let image: File;
-    let price: number;
-    let description: string;
-  }
-
-  @Input()
-
-
-  ngOnInit(): void {
-  }
-
+export class ArticleComponent {
+  @Input() article: Article;
 }
 
-function itemSubscriber(observer: Observer<ArticleComponent>) {
-
-}

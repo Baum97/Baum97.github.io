@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {ArticleService} from "./article/article.service";
+import {Article} from "./article/article.model";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'EinkaufsHeldFE';
+  articles: Article[] = [];
+
+  constructor(private articleService: ArticleService) {
+  }
+
+  ngOnInit() {
+    this.articleService.getArticles().subscribe((data) => {
+      this.articles = data;
+    });
+  }
 }

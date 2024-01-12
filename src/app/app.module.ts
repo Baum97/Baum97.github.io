@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ArticleArrayComponent } from './article-array/article-array.component';
 import { ArticleComponent } from './article/article.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 
@@ -16,7 +15,6 @@ import {MatGridListModule} from "@angular/material/grid-list";
     BrowserModule,
     AppRoutingModule,
     MatGridListModule,
-    ArticleArrayComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

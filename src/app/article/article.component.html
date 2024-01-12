@@ -1,2 +1,10 @@
-<p>article works!</p>
-<button class="isomorphic-button">Click me</button>
+<!-- article.component.html -->
+<div class="article-container">
+  <img [src]="article.image" alt="{{ article.name }}" class="article-image" />
+  <div class="article-details">
+    <h3>{{ article.name }}</h3>
+    <p>{{ article.description }}</p>
+    <p class="article-price">{{ article.price | currency: 'USD' }}</p>
+    <!-- You can add buttons for actions like "Add to Cart" here -->
+  </div>
+</div>
