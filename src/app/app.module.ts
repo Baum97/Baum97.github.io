@@ -10,13 +10,13 @@ import {MatGridListModule} from "@angular/material/grid-list";
 @NgModule({
   declarations: [
     AppComponent,
-    ArticleArrayComponent,
     ArticleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatGridListModule
+    MatGridListModule,
+    ArticleArrayComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -29,7 +29,7 @@ export class ArticleArrayComponent implements OnInit {
 
 
   articles: Tile[] = [
-      ArticleComponent.
+
   ];
 }
 
