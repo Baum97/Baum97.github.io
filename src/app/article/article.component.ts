@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Article} from './article.model'
 import {Observer} from "rxjs";
+import {ArticleService} from "./article.service";
 
 @Component({
   selector: 'app-article',
@@ -8,7 +9,17 @@ import {Observer} from "rxjs";
   styleUrls: ['./article.component.less']
 })
 
-export class ArticleComponent {
+export class ArticleComponent implements OnInit{
+  articles: Article[] = [];
+
+  constructor(private articleService: ArticleService) {}
+
   @Input() article: Article;
+
+  ngOnInit() {
+    this.articleService.getArticles().subscribe((data) => {
+      this.articles = data;
+    });
+  }
 }
 

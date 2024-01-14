@@ -7,4 +7,8 @@
     <p class="article-price">{{ article.price | currency: 'USD' }}</p>
     <!-- You can add buttons for actions like "Add to Cart" here -->
   </div>
+
+  <div *ngFor="let article of articles">
+    <app-article [article]="article"></app-article>
+  </div>
 </div>
