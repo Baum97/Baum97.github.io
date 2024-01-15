@@ -5,7 +5,7 @@
 @card-border: 1px solid #e0e0e0; // Card border color
 @card-border-radius: 8px; // Card border radius
 @card-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Card box shadow
-@card-width: 20%; // Card width as a percentage of the screen
+@card-width: 200px; // Card width as a percentage of the screen
 @card-height: 40vh; // Card height as 40% of the viewport height
 
 header {
@@ -86,7 +86,8 @@ header {
 
 body {
   .mat-card {
-    width: @card-width;
+    max-width: @card-width;
+    min-width: @card-width;
     height: @card-height;
     background-color: @card-background;
     border: @card-border;
@@ -102,7 +103,7 @@ body {
   .card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; // Adjust as needed
+    justify-content: left; // Adjust as needed
 
     .mat-card {
       margin-bottom: 16px; // Adjust as needed
