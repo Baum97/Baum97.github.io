@@ -1,5 +1,9 @@
 @neumorphic-background: #e0e0e0;
 @neumorphic-box-shadow: inset 8px 8px 16px #c4c4c4, inset -8px -8px 16px #ffffff;
+@card-background: #f2f2f2; // Card background color
+@card-border: 1px solid #e0e0e0; // Card border color
+@card-border-radius: 8px; // Card border radius
+@card-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Card box shadow
 
 // Apply neumorphic styling to a button
 .neumorphic-button {
@@ -12,5 +16,17 @@
 
   &:hover {
     box-shadow: inset 6px 6px 12px #c4c4c4, inset -6px -6px 12px #ffffff;
+  }
+
+  .mat-card {
+    background-color: @card-background;
+    border: @card-border;
+    border-radius: @card-border-radius;
+    box-shadow: @card-box-shadow;
+
+    // You can add more styling as needed
+    padding: 16px;
+    margin: 16px;
+    // ... other styles
   }
 }

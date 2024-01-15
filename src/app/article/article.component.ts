@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Article} from './article.model'
-import {Observer} from "rxjs";
 import {ArticleService} from "./article.service";
 
 @Component({

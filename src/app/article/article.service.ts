@@ -8,12 +8,17 @@ import {Article} from "./article.model";
 })
 
 export class  ArticleService{
-  private apiUrl = 'https://localhost:8080/articles';
+  private apiUrl;
 
   constructor(private http: HttpClient) {
+    this.apiUrl = 'http://localhost:8080/articles';
   }
 
-  getArticles(): Observable<Article[]> {
+  public getArticles(): Observable<Article[]> {
     return this.http.get<Article[]>(this.apiUrl);
+  }
+
+  public postArticle(article: Article) {
+    return this.http.post<Article>(this.apiUrl, article);
   }
 }
