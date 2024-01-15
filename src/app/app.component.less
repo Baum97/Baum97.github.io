@@ -86,6 +86,7 @@ header {
 
 body {
   .mat-card {
+    position: relative;
     max-width: @card-width;
     min-width: @card-width;
     height: @card-height;
@@ -98,6 +99,16 @@ body {
     padding: 16px;
     margin: 16px;
     // ... other styles
+  }
+
+  .card-content {
+    flex: 1; // Expand to take remaining space
+    padding: 16px;
+
+    p.footer {
+      bottom: 0;
+      position: sticky;
+    }
   }
 
   .card-container {
