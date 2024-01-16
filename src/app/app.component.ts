@@ -14,9 +14,4 @@ export class AppComponent {
   constructor(private articleService: ArticleService) {
   }
 
-  ngOnInit() {
-    this.articleService.getArticles().subscribe((data) => {
-      this.articles = data;
-    });
-  }
 }

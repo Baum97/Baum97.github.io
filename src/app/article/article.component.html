@@ -1,13 +1,21 @@
 <!-- article.component.html -->
-<div class="article-container">
-  <div class="article-details">
-    <h3>{{ article.name }}</h3>
-    <p>{{ article.description }}</p>
-    <p class="article-price">{{ article.price | currency: 'USD' }}</p>
-    <!-- You can add buttons for actions like "Add to Cart" here -->
+<html>
+<body>
+<div class="card-container">
+<div *ngFor="let article of articles">
+  <a [routerLink]="['/articles', article.articleNo]">
+  <div class="mat-card">
+    <div class="card-content">
+      <h3>{{article.name}}</h3>
+      <p>{{article.description}} </p>
+      <br><br><br>
+      <p class="footer">By: <a>{{article.company}}</a></p>
+      <p class="footer">{{article.price}}€</p>
+    </div>
   </div>
-
-  <div *ngFor="let article of articles">
-    <app-article [article]="article"></app-article>
-  </div>
+  </a>
 </div>
+</div>
+
+</body>
+</html>

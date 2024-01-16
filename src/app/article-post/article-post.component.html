@@ -1,1 +1,54 @@
-<p>article-post works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angular Form POST Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-sanitize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-animate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-aria.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-messages.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-resource.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-touch.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-cookies.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-loader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-mocks.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-parse-ext.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular-resource.min.js"></script>
+</head>
+<body ng-app="app">
+
+<div ng-controller="ArticleFormController">
+  <form ng-submit="submitForm()" name="articleForm">
+    <label for="name">Name:</label>
+    <input type="text" id="title" name="title" ng-model="articleData.title" required>
+
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" ng-model="articleData.content" required></textarea>
+
+    <button type="submit" ng-disabled="!articleForm.$valid">Submit</button>
+  </form>
+</div>
+
+<script>
+  angular.module('app', [])
+    .controller('ArticleFormController', ['$scope', '$http', function($scope, $http) {
+      $scope.articleData = {};
+
+      $scope.submitForm = function() {
+        $http.post('http://localhost:8080/articles', $scope.articleData)
+          .then(function(response) {
+            console.log('Article created successfully:', response.data);
+          })
+          .catch(function(error) {
+            console.error('Error creating article:', error);
+          });
+      };
+    }]);
+</script>
+
+</body>
+</html>

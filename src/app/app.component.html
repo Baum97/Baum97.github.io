@@ -17,7 +17,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.12.2/less.min.js"></script>
   <title>Angular Header</title>
 </head>
-
 <body>
 <header>
   <div class="logo">Markt♥Helfer</div>
@@ -40,21 +39,6 @@
   </nav>
 </header>
 
-<div class="card-container">
-
-    <div *ngFor="let article of articles">
-      <div class="mat-card">
-        <div class="card-content">
-          <h3>{{article.name}}</h3>
-          <p>{{article.description}} </p>
-          <br><br><br>
-          <p class="footer">By: <a>{{article.company}}</a></p>
-          <p class="footer">{{article.price}}€</p>
-        </div>
-      </div>
-    </div>
-
-</div>
 
 
 </body>
