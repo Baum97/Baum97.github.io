@@ -4,7 +4,7 @@ import {ArticleComponent} from "./article/article.component";
 import {ArticlePostComponent} from "./article-post/article-post.component";
 import {ImpressumComponent} from "./impressum-component/impressum-component.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'article', component: ArticleComponent},
   { path: 'article/:id', component: ArticleComponent},
   { path: 'article-post', component: ArticlePostComponent},
