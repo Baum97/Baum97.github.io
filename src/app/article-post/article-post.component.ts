@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ArticlePostService} from "./article-post.service";
+import {Article} from "../article/article.model";
 
 @Component({
   selector: 'app-article-post',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./article-post.component.less'],
 })
 export class ArticlePostComponent implements OnInit {
+  articles : Article[] = [];
 
-  constructor() { }
+  constructor(private articlepostService: ArticlePostService) { }
+
+  @Input() article: Article;
 
   ngOnInit(): void {
-  }
+    this.articlepostService.postArticle(this.article)
+      .subscribe(article => this.articles.push(this.article));
+
+}
 
 }

@@ -16,9 +16,14 @@ export class ArticleComponent implements OnInit{
   @Input() article: Article;
 
   ngOnInit() {
-    this.articleService.getArticles().subscribe((data) => {
-      this.articles = data;
-    });
+    this.showArticle();
+  }
+
+  showArticle() {
+    this.articleService.getArticles().subscribe(data => this.articles = data)
+  }
+  showArticleById() {
+    this.articleService.getArticle().subscribe(data => this.article = data)
   }
 }
 

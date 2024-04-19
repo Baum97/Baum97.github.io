@@ -1,6 +1,7 @@
 import {Article} from "../article/article.model";
 import {Component, Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
+import {catchError, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: 'article-post.component.html'
 })
 
-export class  ArticleService {
+export class  ArticlePostService {
   private apiUrl;
   articleData: any = {}
 
@@ -19,10 +20,7 @@ export class  ArticleService {
     this.apiUrl = 'http://localhost:8080/articles';
   }
 
-  public postArticle() {
-    return this.http.post<Article>(this.apiUrl, this.articleData).subscribe( {
-      next: (value) => console.log(value),
-      error: (value) => console.error(value)
-    });
+  public postArticle(article: Article):Observable<Article> {
+    return this.http.post<Article>(this.apiUrl, article);
   }
 }

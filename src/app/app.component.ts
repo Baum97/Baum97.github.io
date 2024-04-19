@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'EinkaufsHeldFE';
   articles: Article[] = [];
 
-  constructor(private articleService: ArticleService) {
+  constructor() {
   }
 
 }
