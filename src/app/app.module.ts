@@ -3,20 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ArticleComponent } from './article/article.component';
+import {ArticlesComponent} from './articles/articles.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {ArticleService} from "./article/article.service";
+import {ArticlesService} from "./articles/articles.service";
 import { ArticlePostComponent } from './article-post/article-post.component';
 import {ImpressumComponent} from "./impressum-component/impressum-component.component";
 import {NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {ArticleComponent} from "./article/article.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticleComponent,
     ArticlePostComponent,
+    ArticlesComponent,
     ImpressumComponent
   ],
   imports: [
@@ -27,7 +29,7 @@ import {FormsModule} from "@angular/forms";
     NgOptimizedImage,
     FormsModule,
   ],
-  providers: [ArticleService],
+  providers: [ArticlesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

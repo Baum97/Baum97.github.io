@@ -1,4 +1,4 @@
-import {Article} from "../article/article.model";
+import {Article} from "../articles/articles.model";
 import {Component, Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";

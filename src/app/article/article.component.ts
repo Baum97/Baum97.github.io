@@ -1,29 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Article} from './article.model'
-import {ArticleService} from "./article.service";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.less']
 })
+export class ArticleComponent implements OnInit {
 
-export class ArticleComponent implements OnInit{
-  articles: Article[] = [];
+  constructor() { }
 
-  constructor(private articleService: ArticleService) {}
-
-  @Input() article: Article;
-
-  ngOnInit() {
-    this.showArticle();
+  ngOnInit(): void {
   }
 
-  showArticle() {
-    this.articleService.getArticles().subscribe(data => this.articles = data)
-  }
-  showArticleById() {
-    this.articleService.getArticle().subscribe(data => this.article = data)
-  }
 }
-
