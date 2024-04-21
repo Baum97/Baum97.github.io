@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Article} from './articles.model'
 import {ArticlesService} from "./articles.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-article',
@@ -13,6 +14,7 @@ export class ArticlesComponent implements OnInit{
 
   constructor(private articlesService: ArticlesService) {}
 
+
   @Input() article: Article;
 
   ngOnInit() {
@@ -23,7 +25,7 @@ export class ArticlesComponent implements OnInit{
     this.articlesService.getArticles().subscribe(data => this.articles = data)
   }
   showArticleById() {
-    this.articlesService.getArticle().subscribe(data => this.article = data)
+    return this.articlesService.getArticle().subscribe(data => this.article = data)
   }
 }
 
