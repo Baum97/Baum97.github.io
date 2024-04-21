@@ -7,6 +7,9 @@
 @card-width: 200px; // Card width as a percentage of the screen
 @card-height: 40vh; // Card height as 40% of the viewport height
 
+.surrounding{
+  margin: 20px;
+}
 
 body {
   .mat-card {
@@ -21,7 +24,6 @@ body {
 
     // You can add more styling as needed
     padding: 16px;
-    margin: 16px;
     // ... other styles
   }
 
@@ -39,17 +41,21 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: left; // Adjust as needed
-
     .mat-card {
-      margin-bottom: 16px; // Adjust as needed
+
     }
+    padding-left: 21px;
+    padding-right: 21px;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
   }
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
+
+
 
 // Apply neumorphic styling to a button
 .neumorphic-button {

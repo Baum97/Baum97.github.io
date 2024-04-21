@@ -3,6 +3,7 @@
 <body>
 <div class="card-container">
 <div *ngFor="let article of articles">
+  <div class="surrounding">
   <a [routerLink]="['/article', article.articleNo]">
   <div class="mat-card">
     <div class="card-content">
@@ -14,6 +15,7 @@
     </div>
   </div>
   </a>
+  </div>
 </div>
 </div>
 
