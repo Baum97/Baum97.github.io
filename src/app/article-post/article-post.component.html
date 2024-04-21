@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angular Form POST Example</title>
+</head>
+<body ng-app="app">
+
+<div ng-controller="ArticleFormController">
+  <form ng-submit="submitForm()" name="articleForm">
+
+    <button type="submit" ng-disabled="!articleForm.$valid">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>

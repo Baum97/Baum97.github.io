@@ -1,0 +1,73 @@
+@neumorphic-background: #e0e0e0;
+@neumorphic-box-shadow: inset 8px 8px 16px #c4c4c4, inset -8px -8px 16px #ffffff;
+@card-background: #f2f2f2; // Grey background color
+@card-border: 1px solid #e0e0e0; // Card border color
+@card-border-radius: 8px; // Card border radius
+@card-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Card box shadow
+@card-width: 200px; // Card width as a percentage of the screen
+@card-height: 40vh; // Card height as 40% of the viewport height
+
+.surrounding{
+  margin: 20px;
+}
+
+body {
+  .mat-card {
+    position: relative;
+    max-width: @card-width;
+    min-width: @card-width;
+    height: @card-height;
+    background-color: @card-background;
+    border: @card-border;
+    border-radius: @card-border-radius;
+    box-shadow: @card-box-shadow;
+
+    // You can add more styling as needed
+    padding: 16px;
+    // ... other styles
+  }
+
+  .card-content {
+    flex: 1; // Expand to take remaining space
+    padding: 16px;
+
+    p.footer {
+      bottom: 0;
+      position: sticky;
+    }
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left; // Adjust as needed
+    .mat-card {
+
+    }
+    padding-left: 21px;
+    padding-right: 21px;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+
+
+
+// Apply neumorphic styling to a button
+.neumorphic-button {
+  background-color: @neumorphic-background;
+  box-shadow: @neumorphic-box-shadow;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: inset 6px 6px 12px #c4c4c4, inset -6px -6px 12px #ffffff;
+  }
+}
+
