@@ -24,8 +24,5 @@ export class ArticlesComponent implements OnInit{
   showArticle() {
     this.articlesService.getArticles().subscribe(data => this.articles = data)
   }
-  showArticleById() {
-    return this.articlesService.getArticle().subscribe(data => this.article = data)
-  }
 }
 
