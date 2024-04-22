@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ArticleService} from "./article.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-article',
@@ -7,13 +8,16 @@ import {ArticleService} from "./article.service";
   styleUrls: ['./article.component.less']
 })
 export class ArticleComponent implements OnInit {
-
+  helpvar!: string | null;
   article: any;
-  constructor(private articleService: ArticleService) { }
+  constructor(private articleService: ArticleService, private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
-    this.article = this.articleService.getArticle();
+    this.route.paramMap.subscribe((param) => {
+      this.helpvar = param.get('id');
+      this.article = this.articleService.getArticle(this.helpvar);
+    })
 
   }
 

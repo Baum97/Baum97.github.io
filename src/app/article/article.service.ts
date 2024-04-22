@@ -15,8 +15,12 @@ export class ArticleService{
     this.apiUrl = 'http://localhost:8080/article/';
   }
 
-  public getArticle() {
+  public getArticle(id: string|null) {
     console.log('number: '+ this.articleNo);
-    return this.http.get<Article>(this.apiUrl + this.articleNo);
+    return this.http.get<Article>(this.apiUrl + id);
+  }
+
+  navigateToArticle() {
+
   }
 }
