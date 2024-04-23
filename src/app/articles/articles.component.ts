@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 
 export class ArticlesComponent implements OnInit{
-  public articles: Article[] = [];
+  articles: Article[] = [];
 
   constructor(private articlesService: ArticlesService, private router: Router) {}
 
