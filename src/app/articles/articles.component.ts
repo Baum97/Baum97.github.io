@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 
 export class ArticlesComponent implements OnInit{
-  articles: Article[] = [];
+  public articles: Article[] = [];
 
   constructor(private articlesService: ArticlesService, private router: Router) {}
 
@@ -19,15 +19,11 @@ export class ArticlesComponent implements OnInit{
   @Input() article: Article;
 
   ngOnInit() {
-    this.showArticle();
+    this.showArticles();
   }
 
-  showArticle() {
+  showArticles() {
     this.articlesService.getArticles().subscribe(data => this.articles = data)
-  }
-
-  navigateToArticle(articleNo: number) {
-    this.router.navigate(['/article/'+articleNo]);
   }
 
   protected readonly ArticlesService = ArticlesService;

@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Article} from "../articles/articles.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
@@ -9,18 +10,14 @@ import {Article} from "../articles/articles.model";
 export class ArticleService{
   private apiUrl;
 
-  articleNo: number;
+  articleUrl: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: ActivatedRoute) {
     this.apiUrl = 'http://localhost:8080/article/';
   }
 
-  public getArticle(id: string|null) {
-    console.log('number: '+ this.articleNo);
-    return this.http.get<Article>(this.apiUrl + id);
-  }
-
-  navigateToArticle() {
-
+  public getArticle() {
+    this.articleUrl = this.router.snapshot.url.join();
+    return this.http.get<Article>(this.articleUrl);
   }
 }
