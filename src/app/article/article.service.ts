@@ -10,7 +10,7 @@ import {formatNumber} from "@angular/common";
 })
 
 export class ArticleService{
-  private apiUrl;
+  private readonly apiUrl;
 
   articleUrl?: string;
   articleNo: string;
@@ -20,8 +20,6 @@ export class ArticleService{
   }
 
   public getArticle() {
-    this.articleUrl = this.router.snapshot.url
-      .at(this.router.snapshot.url.length-1)?.toString()
     return this.http.get<Article>(this.apiUrl + this.articleNo);
   }
 }
