@@ -5,7 +5,7 @@ import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-article',
+  selector: 'app-articles',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.less']
 })
@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 export class ArticlesComponent implements OnInit{
   articles: Article[] = [];
 
-  constructor(private articlesService: ArticlesService, private router: Router) {}
+  constructor(protected articlesService: ArticlesService, private router: Router) {}
 
 
   @Input() article: Article;
