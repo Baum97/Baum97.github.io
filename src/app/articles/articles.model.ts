@@ -3,6 +3,6 @@ export interface Article {
   company : string;
   name: string;
   price: number;
-  //img: string;
+  img: string;
   description: string;
 }
