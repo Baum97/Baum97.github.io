@@ -2,9 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Article} from './articles.model'
 import {ArticlesService} from "./articles.service";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-article',
+  selector: 'app-articles',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.less']
 })
@@ -12,17 +13,19 @@ import {Subscription} from "rxjs";
 export class ArticlesComponent implements OnInit{
   articles: Article[] = [];
 
-  constructor(private articlesService: ArticlesService) {}
+  constructor(protected articlesService: ArticlesService, private router: Router) {}
 
 
   @Input() article: Article;
 
   ngOnInit() {
-    this.showArticle();
+    this.showArticles();
   }
 
-  showArticle() {
+  showArticles() {
     this.articlesService.getArticles().subscribe(data => this.articles = data)
   }
+
+  protected readonly ArticlesService = ArticlesService;
 }
 

@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ArticleService} from "./article.service";
+import {ActivatedRoute} from "@angular/router";
+import {ArticlesComponent} from "../articles/articles.component";
+import {Article} from "../articles/articles.model";
 
 @Component({
   selector: 'app-article',
@@ -7,14 +10,16 @@ import {ArticleService} from "./article.service";
   styleUrls: ['./article.component.less']
 })
 export class ArticleComponent implements OnInit {
-
-  article: any;
+  article: Article;
   constructor(private articleService: ArticleService) { }
 
 
   ngOnInit(): void {
-    this.article = this.articleService.getArticle();
+    this.showArticle();
+  }
 
+  showArticle() {
+    this.articleService.getArticle().subscribe(data => this.article = data);
   }
 
 }
