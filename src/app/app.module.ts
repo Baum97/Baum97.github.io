@@ -12,6 +12,11 @@ import {ImpressumComponent} from "./impressum-component/impressum-component.comp
 import {NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ArticleComponent} from "./article/article.component";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -28,6 +33,10 @@ import {ArticleComponent} from "./article/article.component";
     MatGridListModule,
     NgOptimizedImage,
     FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [ArticlesService],
   bootstrap: [AppComponent]

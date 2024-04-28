@@ -2,16 +2,18 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Article} from './articles.model'
 import {ArticlesService} from "./articles.service";
 import {Subscription} from "rxjs";
-import {Router} from "@angular/router";
+import {Router, RouterModule} from "@angular/router";
+import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.less']
+  styleUrls: ['./articles.component.less'],
 })
 
 export class ArticlesComponent implements OnInit{
   articles: Article[] = [];
+  value: '';
 
   filteredArticles: any[];
   collapsed: boolean = false;
@@ -22,10 +24,10 @@ export class ArticlesComponent implements OnInit{
   @Input() article: Article;
 
   ngOnInit() {
+    this.showArticles();
     this.toggleCollapse();
     this.filterArticles();
     this.resetFilters();
-    this.showArticles();
   }
 
   showArticles() {

@@ -1,3 +1,6 @@
+@import (inline) "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
 @neumorphic-background: #e0e0e0;
 @neumorphic-box-shadow: inset 8px 8px 16px #c4c4c4, inset -8px -8px 16px #ffffff;
 @card-background: #f2f2f2; // Grey background color
@@ -9,6 +12,14 @@
 
 .surrounding{
   margin: 20px;
+}
+
+header{
+  color: white;
+  background: #2980b9;
+  padding: 10px;
+  margin-left: 8px;
+  margin-right: 8.5px;
 }
 
 body {
@@ -54,9 +65,6 @@ body {
   }
 }
 
-
-
-
 // Apply neumorphic styling to a button
 .neumorphic-button {
   background-color: @neumorphic-background;
@@ -69,5 +77,9 @@ body {
   &:hover {
     box-shadow: inset 6px 6px 12px #c4c4c4, inset -6px -6px 12px #ffffff;
   }
+}
+
+.name-form-field {
+  width: 200px;
 }
 
