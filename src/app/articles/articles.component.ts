@@ -13,6 +13,9 @@ import {Router} from "@angular/router";
 export class ArticlesComponent implements OnInit{
   articles: Article[] = [];
 
+  filteredArticles: any[];
+  collapsed: boolean = false;
+  searchQuery: string = '';
   constructor(protected articlesService: ArticlesService, private router: Router) {}
 
 
@@ -26,6 +29,20 @@ export class ArticlesComponent implements OnInit{
     this.articlesService.getArticles().subscribe(data => this.articles = data)
   }
 
-  protected readonly ArticlesService = ArticlesService;
+  toggleCollapse() {
+    this.collapsed = !this.collapsed;
+  }
+
+  filterArticles() {
+    this.filteredArticles = this.articles.filter(article =>
+      article.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      article.description.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
+  resetFilters() {
+    this.searchQuery = '';
+    this.filteredArticles = this.articles;
+  }
 }
 

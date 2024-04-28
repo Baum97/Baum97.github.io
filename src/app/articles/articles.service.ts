@@ -12,7 +12,7 @@ import {ArticleService} from "../article/article.service";
 export class  ArticlesService{
   private apiUrl;
 
-  constructor(private http: HttpClient, private router: Router, private article: ArticleService) {
+  constructor(private http: HttpClient, private article: ArticleService) {
     this.apiUrl = 'http://localhost:8080/articles';
   }
 

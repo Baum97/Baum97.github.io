@@ -2,10 +2,11 @@
     <div class="mat-card">
       <div class="card-content">
         <h3>Article: {{this.article.name}}</h3>
-        <!--{{this.article.image}}-->
+        <div *ngIf="this.article.img != null">
+          {{this.article.img}}
+        </div>
         <p>{{this.article.description}}</p>
         <p>{{this.article.price}}€</p>
-
       </div>
     </div>
 </div>

@@ -1,5 +1,26 @@
 <!-- articles.component.html -->
 <html>
+<header>
+  <div class="container">
+    <div class="header" (click)="toggleCollapse()">
+      <h2>Articles</h2>
+      <i class="fa" [ngClass]="{'fa-chevron-up': collapsed, 'fa-chevron-down': !collapsed}"></i>
+    </div>
+    <div class="content" [ngClass]="{'collapsed': collapsed}">
+      <div class="filters">
+        <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" (input)="filterArticles()">
+        <button (click)="resetFilters()">Reset</button>
+      </div>
+      <div class="articles">
+        <div class="article" *ngFor="let article of filteredArticles">
+          <h3>{{ article.title }}</h3>
+          <p>{{ article.content }}</p>
+        </div>
+        <div *ngIf="filteredArticles.length === 0">No articles found.</div>
+      </div>
+    </div>
+  </div>
+</header>
 <body>
 <div class="card-container">
 <div *ngFor="let article of articles">
@@ -9,6 +30,9 @@
     <div class="card-content">
       <h3>{{article.name}}</h3>
       <p>{{article.description}} </p>
+      <div *ngIf="article.img != null">
+        {{article.img}}
+      </div>
       <br><br><br>
       <p class="footer">By: <a>{{article.company}}</a></p>
       <p class="footer">{{article.price}}€</p>

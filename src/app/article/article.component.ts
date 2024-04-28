@@ -22,4 +22,6 @@ export class ArticleComponent implements OnInit {
     this.articleService.getArticle().subscribe(data => this.article = data);
   }
 
+
+
 }
