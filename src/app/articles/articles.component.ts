@@ -22,6 +22,9 @@ export class ArticlesComponent implements OnInit{
   @Input() article: Article;
 
   ngOnInit() {
+    this.toggleCollapse();
+    this.filterArticles();
+    this.resetFilters();
     this.showArticles();
   }
 
