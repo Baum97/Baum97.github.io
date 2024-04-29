@@ -3,6 +3,8 @@ import {ArticleService} from "./article.service";
 import {ActivatedRoute} from "@angular/router";
 import {ArticlesComponent} from "../articles/articles.component";
 import {Article} from "../articles/articles.model";
+import {FloatLabelType} from "@angular/material/core";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-article',
@@ -11,6 +13,7 @@ import {Article} from "../articles/articles.model";
 })
 export class ArticleComponent implements OnInit {
   article: Article;
+
   constructor(private articleService: ArticleService) { }
 
 
