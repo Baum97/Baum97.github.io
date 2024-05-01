@@ -17,7 +17,6 @@ import {MatButtonModule} from "@angular/material/button";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatInputModule, MatSelectModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import {FloatLabelType} from "@angular/material/core";
 
 
 @NgModule({
