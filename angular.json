@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "EinkaufsHeldFE:build:production"
+              "buildTarget": "EinkaufsHeldFE:build:production"
             },
             "development": {
-              "browserTarget": "EinkaufsHeldFE:build:development"
+              "buildTarget": "EinkaufsHeldFE:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "EinkaufsHeldFE:build"
+            "buildTarget": "EinkaufsHeldFE:build"
           }
         },
         "test": {
