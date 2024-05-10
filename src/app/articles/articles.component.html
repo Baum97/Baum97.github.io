@@ -1,0 +1,68 @@
+<!-- articles.component.html -->
+<html>
+<header>
+  <div class="container">
+    <div class="header" (click)="toggleCollapse()">
+      <h2>Articles</h2>
+      <i class="fa" [ngClass]="{'fa-chevron-up': collapsed, 'fa-chevron-down': !collapsed}"></i>
+    </div>
+    <!--delete to display elements for articles-->
+    <div class="filters">
+      <form class="example-form">
+        <div [formGroup]="filterGroup">
+          <mat-form-field name="articleNameFilter" [floatLabel]="getFloatLabelValue()" formControlName="articleName" appearance="outline" class="name-form-field">
+            <mat-label>Name of Article</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+        <mat-form-field class="description-form-field">
+          <mat-label>Description</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </form>
+
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Outline form field</mat-label>
+          <input matInput placeholder="Placeholder">
+          <mat-icon matSuffix>😊</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </p>
+    </div>
+    <!--delete to display elements for articles-->
+
+    <div class="articles">
+      <div class="article" *ngFor="let article of filteredArticles">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.content }}</p>
+      </div>
+      <div *ngIf="filteredArticles?.length === 0">No articles found.</div>
+    </div>
+  </div>
+</header>
+
+<body>
+<div class="card-container">
+<div *ngFor="let article of articles">
+  <div class="surrounding">
+  <a [routerLink]="['/article', article.articleNo]" (click)="articlesService.setArticleNo(article.articleNo)">
+  <div class="mat-card">
+    <div class="card-content">
+      <h3>{{article.name}}</h3>
+      <p>{{article.description}} </p>
+      <div *ngIf="article.img != null">
+        {{article.img}}
+      </div>
+      <br><br><br>
+      <p class="footer">By: <a>{{article.company}}</a></p>
+      <p class="footer">{{article.price}}€</p>
+    </div>
+  </div>
+  </a>
+  </div>
+</div>
+</div>
+
+</body>
+</html>
