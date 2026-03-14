@@ -1,4 +1,4 @@
-# Sebastian Baum – Portfolio
+# Achim Baumgaertner – Portfolio
 
 Personal portfolio built with Angular 17, deployed to [baum97.github.io](https://baum97.github.io).
 
