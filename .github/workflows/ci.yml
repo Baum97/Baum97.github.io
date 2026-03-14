@@ -51,7 +51,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/einkaufs-held-fe
+          path: dist/baum97-portfolio
 
   deploy:
     if: github.event_name != 'pull_request'

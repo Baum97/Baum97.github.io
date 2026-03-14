@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "EinkaufsHeldFE": {
+    "baum97-portfolio": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/einkaufs-held-fe",
+            "outputPath": "dist/baum97-portfolio",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "EinkaufsHeldFE:build:production"
+              "browserTarget": "baum97-portfolio:build:production"
             },
             "development": {
-              "browserTarget": "EinkaufsHeldFE:build:development"
+              "browserTarget": "baum97-portfolio:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "EinkaufsHeldFE:build"
+            "browserTarget": "baum97-portfolio:build"
           }
         },
         "test": {

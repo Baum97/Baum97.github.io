@@ -3,15 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ArticlesComponent } from './articles/articles.component';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { HttpClientModule } from '@angular/common/http';
-import { ArticlesService } from './articles/articles.service';
-import { ArticlePostComponent } from './article-post/article-post.component';
-import { ImpressumComponent } from './impressum-component/impressum-component.component';
 import { NgOptimizedImage } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ArticleComponent } from './article/article.component';
 import { LandingPageComponent } from './features/landing/landing-page.component';
 import { SectionWrapperComponent } from './shared/ui/section-wrapper/section-wrapper.component';
 import { SkillChipComponent } from './shared/ui/skill-chip/skill-chip.component';
@@ -26,10 +19,6 @@ import { ContactSectionComponent } from './features/contact/contact-section.comp
 @NgModule({
   declarations: [
     AppComponent,
-    ArticleComponent,
-    ArticlePostComponent,
-    ArticlesComponent,
-    ImpressumComponent,
     LandingPageComponent,
     SectionWrapperComponent,
     SkillChipComponent,
@@ -45,11 +34,8 @@ import { ContactSectionComponent } from './features/contact/contact-section.comp
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MatGridListModule,
     NgOptimizedImage,
-    FormsModule,
   ],
-  providers: [ArticlesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
