@@ -1,0 +1,25 @@
+.dot-nav {
+  position: fixed;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  button {
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(235, 242, 247, 0.25);
+    cursor: pointer;
+    transition: transform 160ms ease, background-color 160ms ease;
+
+    &.active {
+      background: #edf8ff;
+      transform: scale(1.22);
+    }
+  }
+}
