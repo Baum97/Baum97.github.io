@@ -1,0 +1,32 @@
+.mobile-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: rgba(4, 16, 28, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+
+  button {
+    border: none;
+    background: transparent;
+    color: #d8edf9;
+    padding: 0.95rem 0.3rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+
+    &.active {
+      color: #ffffff;
+      font-weight: 700;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .mobile-nav {
+    display: grid;
+  }
+}

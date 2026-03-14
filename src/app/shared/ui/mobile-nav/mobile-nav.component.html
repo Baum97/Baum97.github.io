@@ -1,0 +1,9 @@
+<nav class="mobile-nav" aria-label="Section navigation">
+  <button
+    type="button"
+    *ngFor="let item of items"
+    [class.active]="item.id === activeId"
+    (click)="navigate.emit(item.id)">
+    {{ item.label }}
+  </button>
+</nav>
