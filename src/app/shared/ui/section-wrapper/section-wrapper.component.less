@@ -1,28 +1,23 @@
 .section {
-  min-height: 100dvh;
+  min-height: 100svh;
   padding: clamp(1.5rem, 3vw, 3rem);
   scroll-snap-align: start;
   scroll-snap-stop: always;
 
   @media (max-width: 900px) {
-    min-height: 100dvh;
     height: auto;
     overflow: visible;
-    padding-bottom: calc(5.8rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 5.8rem;
   }
 }
 
 .section-inner {
   max-width: 1120px;
   margin: 0 auto;
-  min-height: calc(100dvh - 3rem);
+  min-height: calc(100svh - 3rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  @media (max-width: 900px) {
-    min-height: calc(100dvh - 3rem - 5.8rem - env(safe-area-inset-bottom, 0px));
-  }
 }
 
 .section-header {
