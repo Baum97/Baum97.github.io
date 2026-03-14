@@ -1,0 +1,9 @@
+<section class="section" [attr.id]="id">
+  <div class="section-inner">
+    <header class="section-header" *ngIf="title">
+      <p class="kicker" *ngIf="kicker">{{ kicker }}</p>
+      <h2>{{ title }}</h2>
+    </header>
+    <ng-content></ng-content>
+  </div>
+</section>

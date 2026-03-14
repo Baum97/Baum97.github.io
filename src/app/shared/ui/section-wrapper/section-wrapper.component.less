@@ -1,0 +1,33 @@
+.section {
+  min-height: 100svh;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  min-height: calc(100svh - 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-header {
+  margin-bottom: 1.25rem;
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 1.1;
+  }
+}
+
+.kicker {
+  margin: 0 0 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
