@@ -14,6 +14,14 @@ body {
 	scroll-snap-type: y mandatory;
 }
 
+@media (max-width: 900px) {
+	html,
+	body {
+		scroll-snap-type: y proximity;
+		overscroll-behavior-y: contain;
+	}
+}
+
 body {
 	font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
 	background: #07111b;
