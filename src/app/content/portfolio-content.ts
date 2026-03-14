@@ -16,21 +16,21 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
   projects: [
     {
       title: 'Digital Vehicle Testing Platform',
-      summary: 'Contributed to a full-stack application for digital testing of real vehicles, including delivery automation and containerized workflows.',
-      tags: ['React', 'TypeScript', 'Docker', 'GitHub Actions'],
-      repoUrl: 'https://github.com/Baum97/Baum97.github.io'
+      summary: '',
+      tags: ['Machine Learning', 'Deep Learning', 'Python', 'GitHub Actions', 'Data Science', 'Data Engineering', 'CI/CD', 'Software Design', 'Scientific Research', 'Simulation'],
+      repoUrl: 'https://github.com/Baum97/Forecasting_of_individual_traffic'
     },
     {
       title: 'Charging Station Distribution Simulation',
       summary: 'Built a traffic-aware simulation concept for charging station placement using SUMO, Python, XML, and machine learning methods.',
-      tags: ['Python', 'Machine Learning', 'SUMO', 'XML'],
-      repoUrl: 'https://github.com/Baum97/Baum97.github.io'
+      tags: ['Python', 'Machine Learning', 'SUMO', 'XML', 'Data Analysis', 'Simulation', 'Software Design', 'GitHub Actions', 'Scientific Research'],
+      repoUrl: 'https://github.com/Baum97/Bidirectional-Charging-Stations'
     },
     {
       title: 'Role-Based Time Tracking System',
       summary: 'Implemented an electronic time tracking solution with role and permission management plus database integration.',
-      tags: ['C#', 'Database', 'Software Design'],
-      repoUrl: 'https://github.com/Baum97/Baum97.github.io'
+      tags: ['Java', 'JavaFX', 'Database', 'Software Design', 'FullStack', 'Desktop Application'],
+      repoUrl: 'https://github.com/Baum97/timeMgmt'
     }
   ],
   experience: [
