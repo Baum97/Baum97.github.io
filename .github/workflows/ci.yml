@@ -39,6 +39,8 @@ jobs:
 
       - name: Run tests
         run: npm run test -- --watch=false --browsers=ChromeHeadless
+        env:
+          CI: 'true'
 
       - name: Build Angular project
         run: npm run build -- --configuration production

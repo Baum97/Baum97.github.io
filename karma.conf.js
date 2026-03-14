@@ -1,6 +1,20 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
+const isCI = !!process.env['CI'];
+const fs = require('fs');
+
+if (!isCI) {
+  const edgePaths = [
+    'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+    'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+  ];
+  const edgeBin = edgePaths.find(p => fs.existsSync(p));
+  if (edgeBin) {
+    process.env.CHROME_BIN = edgeBin;
+  }
+}
+
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -8,6 +22,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma')
@@ -25,7 +40,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/einkaufs-held-fe'),
+      dir: require('path').join(__dirname, './coverage/baum97-portfolio'),
       subdir: '.',
       reporters: [
         { type: 'html' },
@@ -37,7 +52,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadless'],
     singleRun: false,
     restartOnFileChange: true
   });
