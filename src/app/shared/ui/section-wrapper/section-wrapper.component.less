@@ -7,8 +7,9 @@
 
   @media (max-width: 900px) {
     overflow-y: auto;
+    overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 5.8rem;
+    padding-bottom: 0;
   }
 }
 
@@ -19,6 +20,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: 900px) {
+    min-height: calc(100dvh - 3rem);
+    padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 .section-header {

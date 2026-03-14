@@ -1,4 +1,4 @@
-<nav class="mobile-nav" aria-label="Section navigation">
+<nav class="mobile-nav" [class.mobile-nav--hidden]="isHidden" aria-label="Section navigation">
   <button
     type="button"
     *ngFor="let item of items"
