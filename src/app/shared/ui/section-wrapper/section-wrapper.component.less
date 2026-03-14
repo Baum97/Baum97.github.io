@@ -1,11 +1,11 @@
 .section {
-  min-height: 100svh;
+  min-height: 100dvh;
+  height: 100dvh;
   padding: clamp(1.5rem, 3vw, 3rem);
   scroll-snap-align: start;
   scroll-snap-stop: always;
 
   @media (max-width: 900px) {
-    height: 100svh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 5.8rem;
@@ -15,7 +15,7 @@
 .section-inner {
   max-width: 1120px;
   margin: 0 auto;
-  min-height: calc(100svh - 3rem);
+  min-height: calc(100dvh - 3rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
