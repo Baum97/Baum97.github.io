@@ -218,9 +218,10 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
         const dx = attractor.x - spark.x;
         const dy = attractor.y - spark.y;
         const distance = Math.hypot(dx, dy);
+        const attractorRadius = 400 + spark.size * 120;
 
-        if (distance > 0 && distance < 520) {
-          const influence = 1 - distance / 520;
+        if (distance > 0 && distance < attractorRadius) {
+          const influence = 1 - distance / attractorRadius;
           const directionX = dx / distance;
           const directionY = dy / distance;
           const angular = directionX * spark.vy - directionY * spark.vx;
