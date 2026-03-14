@@ -19,7 +19,7 @@ export class ExperienceSectionComponent {
 
   @ViewChild('carousel') carouselRef?: ElementRef<HTMLDivElement>;
 
-  readonly pageSize = 3;
+  readonly pageSize = 2;
   activePage = 0;
   pagedItems: ExperienceItem[][] = [];
 
