@@ -1,0 +1,86 @@
+:host {
+  color: #e8f3fb;
+  display: block;
+  position: relative;
+}
+
+.sections {
+  position: relative;
+  z-index: 2;
+}
+
+.desktop-nav {
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.imprint-link {
+  position: fixed;
+  bottom: 1.1rem;
+  right: 1rem;
+  z-index: 31;
+  color: #c4ecff;
+  text-decoration: none;
+  font-size: 0.82rem;
+  opacity: 0.88;
+
+  @media (max-width: 900px) {
+    bottom: 4.2rem;
+  }
+}
+
+.background-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at 15% 20%, rgba(23, 94, 119, 0.45), transparent 45%),
+    radial-gradient(circle at 78% 16%, rgba(24, 82, 140, 0.35), transparent 43%),
+    linear-gradient(130deg, #05090d 0%, #081827 50%, #102f48 100%);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(14px);
+  opacity: 0.45;
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+.orb-a {
+  width: 26vmax;
+  height: 26vmax;
+  left: -8vmax;
+  top: 20vmin;
+  background: #4ec2d8;
+}
+
+.orb-b {
+  width: 22vmax;
+  height: 22vmax;
+  right: -6vmax;
+  bottom: 15vmin;
+  background: #2f7dbf;
+  animation-duration: 18s;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 36px 36px;
+  opacity: 0.2;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(2.5vmax, -1.4vmax, 0) scale(1.08);
+  }
+}
