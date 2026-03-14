@@ -4,13 +4,13 @@
 
     <div class="pager-dots" *ngIf="pageCount > 1" aria-label="Experience pages">
       <button
-        *ngFor="let page of pages; let index = index"
+        *ngFor="let page of pagedItems; let index = index"
         type="button"
         class="pager-dot"
         [class.active]="index === activePage"
         [attr.aria-label]="'Show experience page ' + (index + 1)"
         [attr.aria-current]="index === activePage ? 'page' : null"
-        (click)="goToPage(index, carousel)">
+        (click)="goToPage(index)">
       </button>
     </div>
   </div>
@@ -19,8 +19,8 @@
     #carousel
     class="experience-carousel"
     aria-label="Work experience"
-    (scroll)="onCarouselScroll(carousel)">
-    <section class="experience-page" *ngFor="let page of pages">
+    (scroll)="onCarouselScroll($event)">
+    <section class="experience-page" *ngFor="let page of pagedItems">
       <ul class="experience-list">
         <li class="experience-item" *ngFor="let item of page">
           <p class="period">{{ item.period }}</p>
