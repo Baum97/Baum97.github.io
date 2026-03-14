@@ -1,0 +1,10 @@
+<div class="timeline">
+  <article class="timeline-item" *ngFor="let item of items">
+    <p class="period">{{ item.period }}</p>
+    <h3>{{ item.title }} · {{ item.company }}</h3>
+    <p class="description">{{ item.description }}</p>
+    <div class="stack">
+      <app-skill-chip *ngFor="let tech of item.stack" [label]="tech"></app-skill-chip>
+    </div>
+  </article>
+</div>
