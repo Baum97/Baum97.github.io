@@ -219,8 +219,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
         const dy = attractor.y - spark.y;
         const distance = Math.hypot(dx, dy);
 
-        if (distance > 0 && distance < 360) {
-          const influence = 1 - distance / 360;
+        if (distance > 0 && distance < 520) {
+          const influence = 1 - distance / 520;
           const directionX = dx / distance;
           const directionY = dy / distance;
           const angular = directionX * spark.vy - directionY * spark.vx;
@@ -237,7 +237,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
           const radialNormalized = Math.max(-1, Math.min(1, radialError / Math.max(desiredRadius, 1)));
           const outwardDamping = radialError < 0 ? 0.5 : 1;
           const radialCorrection = radialNormalized * 0.016 * influence * outwardDamping;
-          const gravityPull = (0.009 + influence * 0.017) * (0.85 + sizeFactor * 0.25);
+          const gravityPull = (0.014 + influence * 0.03) * (0.9 + sizeFactor * 0.28);
           const ringProximity =
             1 - Math.min(1, Math.abs(radialError) / Math.max(desiredRadius * 0.9, 1));
           const orbitPull = (0.016 + speed * 0.01) * sizeFactor * speedFactor * influence;
