@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {ArticlesService} from "./articles/articles.service";
-import {Article} from "./articles/articles.model";
 
 @Component({
   selector: 'app-root',
@@ -8,10 +6,5 @@ import {Article} from "./articles/articles.model";
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'EinkaufsHeldFE';
-  articles: Article[] = [];
-
-  constructor() {
-  }
-
+  title = 'Baum97 Portfolio';
 }
