@@ -1,10 +1,36 @@
-<div class="timeline">
-  <article class="timeline-item" *ngFor="let item of items">
-    <p class="period">{{ item.period }}</p>
-    <h3>{{ item.title }} · {{ item.company }}</h3>
-    <p class="description">{{ item.description }}</p>
-    <div class="stack">
-      <app-skill-chip *ngFor="let tech of item.stack" [label]="tech"></app-skill-chip>
+<div class="experience-shell">
+  <div class="experience-header">
+    <h1>Experience</h1>
+
+    <div class="pager-dots" *ngIf="pageCount > 1" aria-label="Experience pages">
+      <button
+        *ngFor="let page of pagedItems; let index = index"
+        type="button"
+        class="pager-dot"
+        [class.active]="index === activePage"
+        [attr.aria-label]="'Show experience page ' + (index + 1)"
+        [attr.aria-current]="index === activePage ? 'page' : null"
+        (click)="goToPage(index)">
+      </button>
     </div>
-  </article>
+  </div>
+
+  <div
+    #carousel
+    class="experience-carousel"
+    aria-label="Work experience"
+    (scroll)="onCarouselScroll($event)">
+    <section class="experience-page" *ngFor="let page of pagedItems">
+      <ul class="experience-list">
+        <li class="experience-item" *ngFor="let item of page">
+          <p class="period">{{ item.period }}</p>
+          <h3>{{ item.title }} · {{ item.company }}</h3>
+          <p class="description">{{ item.description }}</p>
+          <div class="stack">
+            <app-skill-chip *ngFor="let tech of item.stack" [label]="tech"></app-skill-chip>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
 </div>
