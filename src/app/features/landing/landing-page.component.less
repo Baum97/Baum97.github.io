@@ -24,9 +24,26 @@
   text-decoration: none;
   font-size: 0.82rem;
   opacity: 0.88;
+  transition: opacity 140ms ease, color 140ms ease;
+
+  &:hover {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #d6f5ff;
+    outline-offset: 4px;
+  }
 
   @media (max-width: 900px) {
     bottom: 4.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb {
+    animation: none;
   }
 }
 

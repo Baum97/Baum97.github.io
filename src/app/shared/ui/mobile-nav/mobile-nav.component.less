@@ -9,6 +9,7 @@
   background: rgba(4, 16, 28, 0.9);
   border-top: 1px solid rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(16px);
+  padding-bottom: env(safe-area-inset-bottom, 0);
 
   button {
     border: none;
@@ -17,10 +18,21 @@
     padding: 0.95rem 0.3rem;
     font-size: 0.82rem;
     cursor: pointer;
+    transition: color 140ms ease, background-color 140ms ease;
+
+    &:hover {
+      background: rgba(173, 238, 255, 0.1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid #d6f5ff;
+      outline-offset: -2px;
+    }
 
     &.active {
       color: #ffffff;
       font-weight: 700;
+      background: rgba(173, 238, 255, 0.12);
     }
   }
 }
