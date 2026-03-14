@@ -1,0 +1,54 @@
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.repo-list {
+  margin-top: 1.25rem;
+
+  h3 {
+    margin: 0 0 0.8rem;
+    font-size: 1rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem;
+    align-items: baseline;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.25);
+    padding-bottom: 0.3rem;
+
+    a {
+      color: #b3f4ff;
+      text-decoration: none;
+    }
+
+    span {
+      font-size: 0.84rem;
+      opacity: 0.82;
+      white-space: nowrap;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}

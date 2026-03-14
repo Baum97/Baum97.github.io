@@ -1,0 +1,13 @@
+<article class="project-card">
+  <h3>{{ project.title }}</h3>
+  <p>{{ project.summary }}</p>
+
+  <div class="tags">
+    <app-skill-chip *ngFor="let tag of project.tags" [label]="tag"></app-skill-chip>
+  </div>
+
+  <div class="links">
+    <a [href]="project.repoUrl" target="_blank" rel="noreferrer">Repository</a>
+    <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" rel="noreferrer">Live</a>
+  </div>
+</article>
