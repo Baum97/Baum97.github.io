@@ -1,0 +1,33 @@
+<div class="person-grid">
+  <div>
+    <p class="eyebrow">{{ person.role }}</p>
+    <h1>{{ person.name }}</h1>
+    <p class="intro">{{ person.intro }}</p>
+
+    <div class="meta">
+      <span>{{ person.location }}</span>
+      <span>{{ person.availability }}</span>
+    </div>
+
+    <div class="skills">
+      <app-skill-chip *ngFor="let skill of person.skills" [label]="skill"></app-skill-chip>
+    </div>
+  </div>
+
+  <aside class="person-side">
+    <img [src]="person.avatarPath" [alt]="person.name" />
+
+    <div class="quick-list">
+      <h3>Hobbies</h3>
+      <p>{{ person.hobbies.join(' · ') }}</p>
+      <h3>Side Facts</h3>
+      <p>{{ person.facts.join(' · ') }}</p>
+    </div>
+
+    <div class="github" *ngIf="githubOverview">
+      <strong>{{ githubOverview.profileName }}</strong>
+      <p>@{{ githubOverview.username }} · {{ githubOverview.publicRepos }} repos · {{ githubOverview.followers }} followers</p>
+      <small>Data source: {{ githubOverview.source }}</small>
+    </div>
+  </aside>
+</div>

@@ -1,0 +1,92 @@
+.person-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: start;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+h1 {
+  margin: 0.4rem 0 0.9rem;
+  font-size: clamp(2.3rem, 6vw, 4.7rem);
+  line-height: 0.98;
+}
+
+.intro {
+  margin: 0;
+  font-size: clamp(1rem, 1.8vw, 1.28rem);
+  max-width: 64ch;
+  opacity: 0.92;
+}
+
+.meta {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+
+  span {
+    font-size: 0.9rem;
+    opacity: 0.86;
+  }
+}
+
+.skills {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.person-side {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 22px;
+  padding: 1rem;
+  background: rgba(6, 19, 31, 0.55);
+  backdrop-filter: blur(15px);
+
+  img {
+    width: min(220px, 100%);
+    height: auto;
+    border-radius: 16px;
+    display: block;
+  }
+}
+
+.quick-list {
+  margin-top: 0.9rem;
+
+  h3 {
+    margin: 0.8rem 0 0.2rem;
+    font-size: 0.95rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+}
+
+.github {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  opacity: 0.9;
+
+  p {
+    margin: 0.3rem 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .person-grid {
+    grid-template-columns: 1fr;
+  }
+}
