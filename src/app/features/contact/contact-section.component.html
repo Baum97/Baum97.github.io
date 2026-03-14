@@ -4,6 +4,7 @@
   <div class="links">
     <a [href]="'mailto:' + content.email">{{ content.email }}</a>
     <a [href]="content.githubUrl" target="_blank" rel="noreferrer">GitHub</a>
-    <a [href]="content.linkedinUrl" target="_blank" rel="noreferrer">LinkedIn</a>
+    <a *ngIf="content.linkedinUrl" [href]="content.linkedinUrl" target="_blank" rel="noreferrer">LinkedIn</a>
+    <a *ngIf="content.xingUrl" [href]="content.xingUrl" target="_blank" rel="noreferrer">Xing</a>
   </div>
 </div>

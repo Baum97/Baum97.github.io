@@ -15,32 +15,6 @@
   }
 }
 
-.imprint-link {
-  position: fixed;
-  bottom: 1.1rem;
-  right: 1rem;
-  z-index: 31;
-  color: #c4ecff;
-  text-decoration: none;
-  font-size: 0.82rem;
-  opacity: 0.88;
-  transition: opacity 140ms ease, color 140ms ease;
-
-  &:hover {
-    color: #ffffff;
-    opacity: 1;
-  }
-
-  &:focus-visible {
-    outline: 2px solid #d6f5ff;
-    outline-offset: 4px;
-  }
-
-  @media (max-width: 900px) {
-    bottom: 4.2rem;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .orb {
     animation: none;
@@ -56,6 +30,14 @@
   background: radial-gradient(circle at 15% 20%, rgba(23, 94, 119, 0.45), transparent 45%),
     radial-gradient(circle at 78% 16%, rgba(24, 82, 140, 0.35), transparent 43%),
     linear-gradient(130deg, #05090d 0%, #081827 50%, #102f48 100%);
+}
+
+.spark-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.75;
 }
 
 .orb {
@@ -90,6 +72,12 @@
     linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 36px 36px;
   opacity: 0.2;
+}
+
+@media (max-width: 900px) {
+  .spark-canvas {
+    opacity: 0.58;
+  }
 }
 
 @keyframes drift {

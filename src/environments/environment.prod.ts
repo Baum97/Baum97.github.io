@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  appName: 'Sebastian Baum Portfolio',
+  appName: 'Achim Baumgaertner Portfolio',
   github: {
     username: 'Baum97',
     repoLimit: 5,

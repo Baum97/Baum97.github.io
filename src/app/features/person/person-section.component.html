@@ -15,19 +15,19 @@
   </div>
 
   <aside class="person-side">
-    <img [src]="person.avatarPath" [alt]="person.name" />
 
     <div class="quick-list">
       <h3>Hobbies</h3>
       <p>{{ person.hobbies.join(' · ') }}</p>
+      <br>
       <h3>Side Facts</h3>
-      <p>{{ person.facts.join(' · ') }}</p>
+      <p>{{ person.facts.join(' · ') }}<br></p>
     </div>
 
     <div class="github" *ngIf="githubOverview">
       <strong>{{ githubOverview.profileName }}</strong>
-      <p>&#64;{{ githubOverview.username }} | {{ githubOverview.publicRepos }} repos | {{ githubOverview.followers }} followers</p>
-      <small>Data source: {{ githubOverview.source }}</small>
+      <p>&#64;{{ githubOverview.username }} | {{ githubOverview.publicRepos }} public repos | {{ githubOverview.followers }} followers</p>
+
     </div>
   </aside>
 </div>

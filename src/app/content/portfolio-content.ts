@@ -3,62 +3,77 @@ import { PortfolioContent } from '../shared/models/portfolio-content.model';
 
 export const PORTFOLIO_CONTENT: PortfolioContent = {
   person: {
-    name: 'Sebastian Baum',
-    role: 'Full Stack Developer',
-    intro: 'I build practical products with Angular, clean architecture, and a strong focus on maintainable UI systems.',
-    location: 'Germany',
-    availability: 'Open to freelance and product collaborations',
+    name: 'Achim Baumgaertner',
+    role: 'Software Engineer',
+    intro: 'I build practical high quality software products with Angular, TypeScript, Java, Python, C# and clean architecture, with a focus on maintainability and measurable delivery impact.',
+    location: 'Stuttgart Region, Germany',
+    availability: 'Open to software engineering opportunities',
     avatarPath: 'assets/img/Untitled.png',
-    skills: ['Angular', 'TypeScript', 'Node.js', 'REST APIs', 'RxJS', 'CSS Architecture'],
-    hobbies: ['Road cycling', 'Photography', 'Gaming', 'Music production'],
-    facts: ['Enjoys refactoring legacy systems', 'Balances design and technical depth', 'Strong fan of modular frontends']
+    skills: ['Angular', 'TypeScript', 'Java', 'Spring Boot', 'REST APIs', 'CI/CD', 'Python', 'Machine Learning'],
+    hobbies: ['Strength training', 'Cycling', 'Bouldering', 'Gaming', 'Programming'],
+    facts: ['M.Sc. Applied Computer Science', 'German C2 and English C2', 'Experience in automotive and enterprise software projects']
   },
   projects: [
     {
-      title: 'Portfolio Landing Architecture',
-      summary: 'A modular one-page Angular setup with feature-first structure and reusable UI building blocks.',
-      tags: ['Angular', 'LESS', 'GitHub Pages'],
+      title: 'Digital Vehicle Testing Platform',
+      summary: 'Contributed to a full-stack application for digital testing of real vehicles, including delivery automation and containerized workflows.',
+      tags: ['React', 'TypeScript', 'Docker', 'GitHub Actions'],
       repoUrl: 'https://github.com/Baum97/Baum97.github.io'
     },
     {
-      title: 'Content Driven Sections',
-      summary: 'Section content modeled as structured data so text and ordering can evolve without rewriting templates.',
-      tags: ['TypeScript', 'Architecture', 'DX'],
+      title: 'Charging Station Distribution Simulation',
+      summary: 'Built a traffic-aware simulation concept for charging station placement using SUMO, Python, XML, and machine learning methods.',
+      tags: ['Python', 'Machine Learning', 'SUMO', 'XML'],
       repoUrl: 'https://github.com/Baum97/Baum97.github.io'
     },
     {
-      title: 'Graceful GitHub Fallbacks',
-      summary: 'Live profile and repository data with stable fallback rendering when API limits are hit.',
-      tags: ['HTTP', 'RxJS', 'Resilience'],
+      title: 'Role-Based Time Tracking System',
+      summary: 'Implemented an electronic time tracking solution with role and permission management plus database integration.',
+      tags: ['C#', 'Database', 'Software Design'],
       repoUrl: 'https://github.com/Baum97/Baum97.github.io'
     }
   ],
   experience: [
     {
-      period: '2023 - Today',
-      title: 'Frontend Engineer',
-      company: 'Independent Projects',
-      description: 'Designing and delivering maintainable Angular applications with a focus on architecture and UX consistency.',
-      stack: ['Angular', 'TypeScript', 'Jasmine', 'Karma']
+      period: '06/2025 - 02/2026',
+      title: 'Working Student - Software Engineer',
+      company: 'Mercedes-Benz AG (Boeblingen)',
+      description: 'Designed features for a full-stack application for digital vehicle testing, containerized application components, and automated build pipelines.',
+      stack: ['React', 'TypeScript', 'JavaScript', 'Docker', 'CI/CD', 'GitHub Actions']
     },
     {
-      period: '2021 - 2023',
-      title: 'Software Developer',
-      company: 'Product Teams',
-      description: 'Implemented feature modules, API integrations, and internal tooling to accelerate product delivery.',
-      stack: ['Node.js', 'REST', 'SQL', 'CI/CD']
+      period: '10/2024 - 04/2025',
+      title: 'Software Engineer',
+      company: 'Bosch (Bietigheim-Bissingen)',
+      description: 'Designed and implemented a data management system, improved project efficiency, and refactored legacy Angular and database architecture.',
+      stack: ['Angular', 'TypeScript', 'Database', 'Agile']
+    },
+    {
+      period: '05/2023 - 04/2024',
+      title: 'Intern - Software Engineer',
+      company: 'Bosch (Stuttgart)',
+      description: 'Built software for process standardization and material accounting, including user notifications and reporting workflows.',
+      stack: ['C#', 'WPF', 'Power BI', 'Software Design']
+    },
+    {
+      period: '01/2021 - 09/2022',
+      title: 'Working Student - Software Engineer',
+      company: 'Esslingen University of Applied Sciences',
+      description: 'Prepared course material for programming lectures and supported research and development on CI/CD and framework evaluation.',
+      stack: ['CI/CD', 'Software Architecture', 'Research']
     }
   ],
   contact: {
-    email: 'hello@example.dev',
+    email: 'baumgaertner997@gmx.de',
     githubUrl: 'https://github.com/Baum97',
-    linkedinUrl: 'https://www.linkedin.com/',
-    note: 'If you have an ambitious idea, I am happy to discuss a focused implementation plan.'
+    linkedinUrl: 'https://www.linkedin.com/in/achim-baumgärtner-087968240/',
+    xingUrl: 'https://www.xing.com/profile/Achim_Baumgaertner2/',
+    note: 'Open to software engineering collaboration and product-focused development opportunities.'
   }
 };
 
 export const GITHUB_FALLBACK_OVERVIEW: GithubOverview = {
-  profileName: 'Sebastian Baum',
+  profileName: 'Achim Baumgaertner',
   username: 'Baum97',
   followers: 0,
   publicRepos: 0,

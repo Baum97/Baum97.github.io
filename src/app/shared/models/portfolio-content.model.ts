@@ -31,7 +31,8 @@ export interface ExperienceItem {
 export interface ContactContent {
   email: string;
   githubUrl: string;
-  linkedinUrl: string;
+  linkedinUrl?: string;
+  xingUrl?: string;
   note: string;
 }
 
