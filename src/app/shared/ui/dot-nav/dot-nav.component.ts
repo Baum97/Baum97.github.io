@@ -13,6 +13,6 @@ export interface NavItem {
 })
 export class DotNavComponent {
   @Input() items: NavItem[] = [];
-  @Input() activeId: SectionId = 'hero';
+  @Input() activeId: SectionId = 'person';
   @Output() navigate = new EventEmitter<SectionId>();
 }

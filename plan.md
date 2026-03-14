@@ -1,0 +1,54 @@
+## Plan: Angular Portfolio Landing
+
+Umbau der bestehenden Angular-App zu einer englischen, scroll-snap-basierten One-Page-Portfolio-Seite auf GitHub Pages. Die Umsetzung soll nicht nur visuell stark sein, sondern entlang typischer Angular-Projektstruktur modular, skalierbar und erweiterbar aufgebaut werden: klare Trennung zwischen Feature-Bereichen, Präsentationslogik, Datenzugriff, statischem Content und wiederverwendbaren UI-Bausteinen. Die empfohlene Richtung ist eine feature-orientierte Landing-Architektur mit Vollbild-Panels, rechter Dot-Navigation auf Desktop, Bottom-Navigation auf Mobile und einem interaktiven Hintergrund.
+
+**Steps**
+1. Phase 1: Zielstruktur entlang von Angular-Features definieren. Statt weitere Logik direkt in die Root-Komponente zu drücken, die neue Portfolio-Seite in klar getrennte Bereiche aufteilen: Core für app-weite Services und Konfiguration, Shared für wiederverwendbare UI-Bausteine und Modelle, Features für inhaltliche Bereiche wie Person, Projects, Experience und Contact. Die Root-Komponente in d:\Projects\Baum97.github.io\src\app\app.component.ts bleibt dadurch schlank und orchestriert nur Layout, Navigation und Section-State. Dieser Schritt blockiert die restliche Umsetzung, weil er die spätere Erweiterbarkeit bestimmt.
+2. Phase 1: App-Struktur vereinfachen und auf eine Section-Shell reduzieren. Die bestehende Root-Struktur in d:\Projects\Baum97.github.io\src\app\app.component.html und d:\Projects\Baum97.github.io\src\app\app.component.less von Header-plus-Router auf eine section-basierte Shell umbauen. Die aktuelle HTML-Datei enthält html/head/body-Tags und localhost-Links; diese sollten entfernt werden, damit die Angular-Komponente nur echtes Komponenten-Markup rendert. Dieser Schritt hängt von Schritt 1 ab.
+3. Phase 1: Routing auf den neuen Scope reduzieren. In d:\Projects\Baum97.github.io\src\app\app-routing.module.ts die bisherige Artikel-/Form-/Impressum-Navigation aus der Hauptseite lösen. Empfohlene Richtung: Root-Route für die Portfolio-Page, Impressum optional separat als eigene Route. Die Navigation innerhalb der Landing soll nicht router-getrieben, sondern section-getrieben sein. Dieser Schritt hängt von Schritt 2 ab.
+4. Phase 2: Statisches Content-Modell als eigene Schicht anlegen. Für Person, Skills, Hobbies, Side Facts, Experience, Contact und kuratierte Projekttexte eine eigenständige Content-Struktur definieren, statt Daten direkt im Template oder in der Root-Komponente zu verteilen. Empfohlen ist eine saubere Trennung in Interfaces/Typen, statische Content-Dateien und gegebenenfalls Mapper, damit einzelne Sections später unabhängig erweitert oder ersetzt werden können. Dieser Schritt kann parallel zu Schritt 3 vorbereitet werden.
+5. Phase 2: GitHub-Integration modular ergänzen. Einen dedizierten Datenservice nach dem technischen Muster aus d:\Projects\Baum97.github.io\src\app\articles\articles.service.ts einplanen, aber in einem Core- oder Data-Zuschnitt statt innerhalb eines UI-Features. Er sollte Profil-Metadaten, ausgewählte Repositories und eine vereinfachte Activity-/Contribution-Darstellung laden und dabei Fehlerbehandlung, Request-Begrenzung, leicht verzögerte Aktualisierung und Fallback-Daten kapseln. Tagesweise Ungenauigkeit ist dabei ausdrücklich tolerabel, solange die Darstellung konsistent und für Besucher nachvollziehbar bleibt. Ziel ist, dass UI-Komponenten nur konsumieren, aber keine API-Details kennen. Dieser Schritt hängt funktional von Schritt 4 ab, kann aber technisch parallel vorbereitet werden.
+6. Phase 2: Wiederverwendbare UI-Bausteine definieren. Dot-Navigation, Mobile-Bottom-Navigation, Section-Wrapper, Skill-Chips, Project-Cards und gegebenenfalls Stat-Badges nicht als monolithisches Markup in einer Datei halten, sondern als wiederverwendbare Shared-Komponenten planen. Dadurch bleiben Features klein und neue Sections oder Inhaltsvarianten können ohne Copy-Paste ergänzt werden. Dieser Schritt hängt von Schritt 1 ab und unterstützt die Schritte 7 bis 9.
+7. Phase 3: Vollbild-Section-Layout und Navigation bauen. In d:\Projects\Baum97.github.io\src\styles.less globale Regeln für viewport-hohe Abschnitte, smooth scrolling, scroll snap und responsive Verhalten einführen. In der Shell die Sections in definierter Reihenfolge aufbauen: Person, Projects, Experience, Contact. Die aktive Section sollte über Scroll-Position erkannt und an Dot- bzw. Bottom-Navigation weitergereicht werden, ohne dass die einzelnen Sections Navigationslogik selbst besitzen. Dieser Schritt hängt von Schritt 2, Schritt 4 und Schritt 6 ab.
+8. Phase 3: Person-Screen als eigenständiges Feature aufbauen. Der erste Screen sollte den gesamten Viewport nutzen und Name, Kurzprofil, Kern-Skills, Hobbys, Randinfos und Avatar/Portrait sichtbar priorisieren. Die Inhalte sollten aus dem Content-Modell gespeist werden, damit Text, Reihenfolge oder zusätzliche Info-Blöcke später ohne Umbau der Person-Komponente erweiterbar bleiben. Dieser Schritt hängt von Schritt 4 ab und kann parallel zu Schritt 9 erfolgen.
+9. Phase 3: Projects-, Experience- und Contact-Sections als getrennte Features aufbauen. Jedes inhaltliche Modul sollte seine eigene Präsentationslogik und Datenaufnahme besitzen, aber gemeinsame UI-Elemente aus Shared konsumieren. Das verhindert, dass spätere Erweiterungen wie ein zusätzlicher Awards-, Blog- oder Tech-Stack-Bereich die bestehenden Sections destabilisieren. Dieser Schritt hängt von Schritt 4 und Schritt 6 ab.
+10. Phase 3: Interaktiven Hintergrund als isolierte Präsentationsschicht planen. Der bewegliche Hintergrund sollte nicht in Geschäftslogik oder Datenservices vermischt werden, sondern als eigenständige visuelle Ebene mit klaren Inputs wie Scroll-Fortschritt oder Hover-State aufgebaut werden. Empfohlene Richtung: CSS-Gradienten, animierte Shapes oder leichte Layer-Effekte mit kontrollierter Performance. Dieser Schritt kann parallel zu Schritt 8 und Schritt 9 erfolgen.
+11. Phase 4: Alt-Komponenten bewusst aus dem Nutzerpfad nehmen. Die bisherigen Komponenten in d:\Projects\Baum97.github.io\src\app\articles, d:\Projects\Baum97.github.io\src\app\article und d:\Projects\Baum97.github.io\src\app\article-post entweder vollständig aus der Hauptnavigation entfernen oder sauber entkoppeln. Ziel ist eine kohärente App-Struktur ohne gemischte Verantwortlichkeiten zwischen altem Artikel-System und neuem Portfolio-Feature. Dieser Schritt hängt von Schritt 3 ab.
+12. Phase 4: GitHub-Pages-Tauglichkeit und Konfiguration absichern. Titel, Meta-Angaben, Asset-Pfade und eventuell Base-Href für GitHub Pages prüfen. App-weite Konfiguration wie GitHub-Username, API-Endpunkte oder Feature-Flags sollte in einer klaren Konfigurationsschicht liegen, nicht verstreut im UI-Code. Dieser Schritt hängt von Schritt 5 und Schritt 7 ab.
+13. Phase 5: Feinschliff und Qualitätssicherung. Accessibility der Navigation, Fokuszustände, mobile Bedienbarkeit, Ladeverhalten der GitHub-Requests und Fallback-Darstellung ohne API-Antwort verifizieren. Zusätzlich prüfen, ob die modulare Struktur tatsächlich erweiterbar bleibt: neue Section, neues Content-Feld oder neuer Datenendpunkt sollten ohne Eingriff in zentrale Shell-Komponenten ergänzbar sein. Dieser Schritt hängt von allen vorherigen Schritten ab.
+
+**Relevant files**
+- d:\Projects\Baum97.github.io\src\app\app.component.ts — Root-Shell für Section-State, aktive Navigation und minimale Orchestrierung; sollte bewusst schlank bleiben.
+- d:\Projects\Baum97.github.io\src\app\app.component.html — Shell-Markup für die One-Page-Struktur; keine inhaltliche Monolith-Datei für alle UI-Details.
+- d:\Projects\Baum97.github.io\src\app\app.component.less — Shell-spezifisches Styling für Layout und Navigation.
+- d:\Projects\Baum97.github.io\src\styles.less — globale Scroll-Snap-, Viewport- und Background-Regeln.
+- d:\Projects\Baum97.github.io\src\app\app-routing.module.ts — Reduktion auf Portfolio-Entry und optionale Sekundärrouten wie Impressum.
+- d:\Projects\Baum97.github.io\src\app\app.module.ts — Bereinigung und Einbindung der neuen modularen Feature-/Shared-Struktur.
+- d:\Projects\Baum97.github.io\src\app\articles\articles.service.ts — Referenz für das HTTP-Service-Muster, aber nicht als Zielstruktur für Portfolio-Features.
+- d:\Projects\Baum97.github.io\src\environments\environment.ts — geeigneter Ort für Konfigurationen und API-Basiswerte.
+- d:\Projects\Baum97.github.io\src\index.html — Titel, Meta-Description und eventuell Font-/Preconnect-Einbindungen.
+- d:\Projects\Baum97.github.io\src\assets\img — Ablageort für Avatar und Bild-Assets.
+
+**Verification**
+1. Prüfen, dass die Root-Komponente nur Shell-Verantwortung trägt und keine Content- oder API-Details direkt enthält.
+2. Prüfen, dass GitHub-Datenzugriff, statischer Content und Präsentationskomponenten getrennt sind.
+3. Testen, dass Scroll-Snap und Navigation unabhängig von den einzelnen Feature-Sections funktionieren.
+4. Testen, dass Desktop-Dots und Mobile-Bottom-Navigation denselben Section-State sauber konsumieren.
+5. GitHub-Daten mit Erfolgs-, Fehler- und leicht veraltetem Datenstand prüfen; UI muss mit statischen Fallbacks stabil bleiben und eine tagesweise Ungenauigkeit der Activity-Daten sauber tolerieren.
+6. Build und GitHub-Pages-Pfade prüfen.
+7. Eine hypothetische neue Section gedanklich durchspielen; die Struktur sollte ihre Ergänzung ohne Umbau der bestehenden Features erlauben.
+
+**Decisions**
+- Primäre Sprache ist Englisch.
+- Sections im Scope: Person/Intro, Projects, Experience, Contact.
+- Person enthält wichtige Infos, Skills, Hobbys, Randinfos und Avatar/Portrait.
+- Kerninhalte werden statisch gepflegt; GitHub liefert ergänzende Live-Daten, wobei bei Activity-/Contribution-Daten eine tagesweise Ungenauigkeit akzeptabel ist.
+- Scroll-Modus ist echtes Scroll-Snap plus klickbare Navigation.
+- Desktop verwendet rechte, halbtransparente grau-weiße Dots; Mobile verwendet eine Bottom-Navigation.
+- Stilrichtung ist modern, clean, technisch und kreativ mit beweglichem Hintergrund.
+- Architekturpriorität: modulare Feature-Struktur nach Angular-Konventionen statt zentralisierter Root-Implementierung.
+
+**Further Considerations**
+1. Für GitHub-Activity soll eine vereinfachte Contribution-/Activity-Darstellung eingeplant werden, bei der eine tagesweise Ungenauigkeit akzeptabel ist; nur wenn die Datenquelle insgesamt instabil wirkt, sollte auf eine stärker kuratierte Recent-Work-Darstellung ausgewichen werden.
+2. Falls ein rechtlich separates Impressum erforderlich ist, sollte dieses bewusst außerhalb des Scroll-Erlebnisses als einfache statische Route stehen.
+3. Für langfristige Pflege ist kuratierter Projekt-Content fast immer stärker als eine rohe Repo-Liste; GitHub sollte eher anreichern als dominieren.
