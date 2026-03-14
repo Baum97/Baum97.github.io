@@ -4,19 +4,31 @@
   right: 0;
   bottom: 0;
   z-index: 30;
+  width: 100%;
+  transform: none;
   display: none;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   background: rgba(4, 16, 28, 0.9);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   backdrop-filter: blur(16px);
   padding-bottom: env(safe-area-inset-bottom, 0);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
+  touch-action: manipulation;
 
   button {
     border: none;
     background: transparent;
     color: #d8edf9;
-    padding: 0.95rem 0.3rem;
-    font-size: 0.82rem;
+    min-width: 0;
+    padding: 0.85rem 0.2rem;
+    font-size: clamp(0.72rem, 2.8vw, 0.82rem);
+    white-space: nowrap;
     cursor: pointer;
     transition: color 140ms ease, background-color 140ms ease;
 
