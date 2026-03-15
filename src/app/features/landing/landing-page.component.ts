@@ -52,7 +52,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   isMenuOpen = false;
   networkEnabled = true;
   sparksEnabled = true;
-  rippleEnabled = false;
 
   private readonly magnetSelector = '.project-card, .timeline-item, .chip, .repo-list li, a, button';
   private readonly cmInPx = 37.795;
@@ -251,9 +250,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
         if (!this.sparksEnabled) {
           this.clearSparkCanvas();
         }
-        break;
-      case 'ripple':
-        this.rippleEnabled = !this.rippleEnabled;
         break;
       default:
         break;
@@ -674,4 +670,4 @@ interface NetworkNode {
   pulse: number;
 }
 
-type EffectKey = 'network' | 'sparks' | 'ripple';
+type EffectKey = 'network' | 'sparks';
