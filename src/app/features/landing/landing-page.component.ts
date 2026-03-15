@@ -62,6 +62,14 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private animationFrameId = 0;
   private networkContext: CanvasRenderingContext2D | null = null;
   private sparkContext: CanvasRenderingContext2D | null = null;
+  private accumulatedWheel = 0;
+  private isSectionScrolling = false;
+  private sectionScrollUnlockHandle: ReturnType<typeof setTimeout> | null = null;
+  private lastWheelDirection: 1 | -1 | 0 = 0;
+  private readonly wheelThreshold = 300;
+  private readonly edgeActivationPx = 100;
+  private readonly minEdgeThreshold = 300;
+  private readonly sectionScrollLockMs = 300;
   private canvasWidth = 0;
   private canvasHeight = 0;
   private pointerPosition = { x: 0, y: 0 };
@@ -87,6 +95,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    window.addEventListener('wheel', this.handleWheel, { passive: false });
+
     if (this.reducedMotion) {
       return;
     }
@@ -107,7 +117,13 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     document.removeEventListener('pointerover', this.handlePointerOver, true);
     document.removeEventListener('pointerout', this.handlePointerOut, true);
     document.removeEventListener('pointermove', this.handlePointerMove, true);
+    window.removeEventListener('wheel', this.handleWheel);
     window.removeEventListener('resize', this.handleResize);
+
+    if (this.sectionScrollUnlockHandle) {
+      clearTimeout(this.sectionScrollUnlockHandle);
+      this.sectionScrollUnlockHandle = null;
+    }
   }
 
   @HostListener('window:scroll')
@@ -115,8 +131,78 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateActiveSection();
   }
 
+  private readonly handleWheel = (event: WheelEvent): void => {
+    if (window.innerWidth <= 900) {
+      return;
+    }
+
+    if (this.isSectionScrolling) {
+      event.preventDefault();
+      return;
+    }
+
+    const direction: 1 | -1 = event.deltaY > 0 ? 1 : -1;
+    const currentIndex = this.getCurrentSectionIndex();
+    const activeSectionId = this.navItems[currentIndex]?.id;
+    const activeSection = activeSectionId ? document.getElementById(activeSectionId) : null;
+
+    if (!activeSection) {
+      return;
+    }
+
+    const viewTop = window.scrollY;
+    const viewBottom = viewTop + window.innerHeight;
+    const sectionTop = activeSection.offsetTop;
+    const sectionBottom = sectionTop + activeSection.offsetHeight;
+
+    const distanceToTopEdge = Math.max(0, viewTop - sectionTop);
+    const distanceToBottomEdge = Math.max(0, sectionBottom - viewBottom);
+    const edgeDistance = direction > 0 ? distanceToBottomEdge : distanceToTopEdge;
+
+    const hasTargetSection =
+      (direction > 0 && currentIndex < this.navItems.length - 1) ||
+      (direction < 0 && currentIndex > 0);
+
+    if (!hasTargetSection) {
+      this.accumulatedWheel = 0;
+      this.lastWheelDirection = 0;
+      return;
+    }
+
+    if (edgeDistance > this.edgeActivationPx) {
+      this.accumulatedWheel = 0;
+      this.lastWheelDirection = 0;
+      return;
+    }
+
+    event.preventDefault();
+
+    if (this.lastWheelDirection !== 0 && this.lastWheelDirection !== direction) {
+      this.accumulatedWheel = 0;
+    }
+
+    this.lastWheelDirection = direction;
+    const dynamicThreshold = this.getDynamicEdgeThreshold(edgeDistance);
+
+    this.accumulatedWheel += event.deltaY;
+
+    if (this.accumulatedWheel > dynamicThreshold) {
+      this.accumulatedWheel = 0;
+      this.lastWheelDirection = 0;
+      this.snapToRelativeSection(1);
+      return;
+    }
+
+    if (this.accumulatedWheel < -dynamicThreshold) {
+      this.accumulatedWheel = 0;
+      this.lastWheelDirection = 0;
+      this.snapToRelativeSection(-1);
+    }
+  };
+
   scrollToSection(sectionId: SectionId): void {
     const element = document.getElementById(sectionId);
+    this.beginSectionScrollLock();
     element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -501,6 +587,57 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seedNetworkNodes();
     this.seedSparks();
   };
+
+  private snapToRelativeSection(direction: 1 | -1): void {
+    const current = this.getCurrentSectionIndex();
+    const target = Math.max(0, Math.min(current + direction, this.navItems.length - 1));
+
+    if (target === current) {
+      return;
+    }
+
+    this.snapToSection(target);
+  }
+
+  private snapToSection(index: number): void {
+    const target = this.navItems[index];
+    if (!target) {
+      return;
+    }
+
+    const element = document.getElementById(target.id);
+    if (!element) {
+      return;
+    }
+
+    this.activeSection = target.id;
+    this.beginSectionScrollLock();
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  private getCurrentSectionIndex(): number {
+    const index = this.navItems.findIndex((item) => item.id === this.activeSection);
+    return index >= 0 ? index : 0;
+  }
+
+  private beginSectionScrollLock(): void {
+    this.isSectionScrolling = true;
+
+    if (this.sectionScrollUnlockHandle) {
+      clearTimeout(this.sectionScrollUnlockHandle);
+    }
+
+    this.sectionScrollUnlockHandle = setTimeout(() => {
+      this.isSectionScrolling = false;
+      this.sectionScrollUnlockHandle = null;
+    }, this.sectionScrollLockMs);
+  }
+
+  private getDynamicEdgeThreshold(edgeDistance: number): number {
+    const normalized = Math.max(0, Math.min(1, edgeDistance / this.edgeActivationPx));
+    const threshold = this.minEdgeThreshold + normalized * (this.wheelThreshold - this.minEdgeThreshold);
+    return Math.round(threshold);
+  }
 }
 
 interface NetworkNode {
