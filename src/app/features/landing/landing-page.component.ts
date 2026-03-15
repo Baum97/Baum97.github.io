@@ -619,10 +619,10 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.snapToSection(target);
+    this.snapToSection(target, direction);
   }
 
-  private snapToSection(index: number): void {
+  private snapToSection(index: number, direction?: 1 | -1): void {
     const target = this.navItems[index];
     if (!target) {
       return;
@@ -635,7 +635,9 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.activeSection = target.id;
     this.beginSectionScrollLock();
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // When scrolling up (direction = -1), start from the bottom of the section
+    const block = direction === -1 ? 'end' : 'start';
+    element.scrollIntoView({ behavior: 'smooth', block });
   }
 
   private getCurrentSectionIndex(): number {
