@@ -1,9 +1,42 @@
 <div class="background-layer" aria-hidden="true">
+  <canvas #networkCanvas class="network-canvas"></canvas>
   <canvas #sparkCanvas class="spark-canvas"></canvas>
+  <div class="calm-ripple" [class.calm-ripple--disabled]="!rippleEnabled"></div>
   <div class="orb orb-a"></div>
   <div class="orb orb-b"></div>
   <div class="grid"></div>
 </div>
+
+<button
+  type="button"
+  class="hamburger"
+  [class.hamburger--open]="isMenuOpen"
+  [attr.aria-expanded]="isMenuOpen"
+  aria-controls="intro-menu"
+  aria-label="Toggle intro menu"
+  (click)="toggleMenu()">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
+
+<aside id="intro-menu" class="intro-drawer" [class.intro-drawer--open]="isMenuOpen" aria-label="Intro menu">
+
+
+  <div class="drawer-title">Background Effects</div>
+  <button type="button" class="effect-toggle" [class.effect-toggle--active]="networkEnabled" (click)="toggleEffect('network')">
+    Neural Net
+    <span class="toggle-track"><span class="toggle-thumb"></span></span>
+  </button>
+  <button type="button" class="effect-toggle" [class.effect-toggle--active]="sparksEnabled" (click)="toggleEffect('sparks')">
+    Sparks
+    <span class="toggle-track"><span class="toggle-thumb"></span></span>
+  </button>
+  <button type="button" class="effect-toggle" [class.effect-toggle--active]="rippleEnabled" (click)="toggleEffect('ripple')">
+    Calm Ripple
+    <span class="toggle-track"><span class="toggle-thumb"></span></span>
+  </button>
+</aside>
 
 <app-dot-nav
   class="desktop-nav"
@@ -11,6 +44,8 @@
   [activeId]="activeSection"
   (navigate)="scrollToSection($event)">
 </app-dot-nav>
+
+<app-mobile-nav [items]="navItems" [activeId]="activeSection" (navigate)="scrollToSection($event)"></app-mobile-nav>
 
 <div class="sections">
   <app-section-wrapper id="person" [title]="'Hi, I am:'" kicker="Intro">

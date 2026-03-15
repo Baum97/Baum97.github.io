@@ -9,9 +9,9 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
     location: 'Stuttgart Region, Germany',
     availability: 'Open to software engineering opportunities',
     avatarPath: 'assets/img/Untitled.png',
-    skills: ['Angular', 'TypeScript', 'Java', 'Spring Boot', 'REST APIs', 'CI/CD', 'Python', 'Machine Learning'],
-    hobbies: ['Strength training', 'Cycling', 'Bouldering', 'Gaming', 'Programming'],
-    facts: ['M.Sc. Applied Computer Science', 'German C2 and English C2', 'Experience in automotive and enterprise software projects']
+    skills: ['React', 'JavaScript', 'Angular', 'TypeScript', 'Java', 'Python', 'C#', 'Spring Boot', 'REST APIs', 'CI/CD', 'Machine Learning', 'Deep Learning', 'Agentic Development', ],
+    hobbies: ['Strength training', 'Cycling', 'Bouldering', 'Gaming', 'Programming', 'Coffee'],
+    facts: ['M.Sc. Applied Computer Science (2025-2026)', "B.Eng. & B.Sc. Software Engineering (2020-2024)", 'German C2', 'English C2', 'Experience: Automotive, Research, Web, Desktop, FullStack, Data Science', 'Passionate about software craftsmanship, a happy and productive team, and  product-focused development']
   },
   projects: [
     {
@@ -32,6 +32,12 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
       summary: 'Implemented an electronic time tracking solution with role and permission management plus database integration.',
       tags: ['Java', 'JavaFX', 'Database', 'Software Design', 'FullStack', 'Desktop Application'],
       repoUrl: 'https://github.com/Baum97/timeMgmt'
+    },
+    {
+      title: 'E-Vehicle Charging Station WebApp ',
+      summary: 'Designed, delegated and developed a web application for locating and managing electric vehicle charging stations, featuring interactive maps and user-friendly interfaces. Lead a team of 4, coordinated development efforts, and implemented core features using Java, Spring Boot, TypeScript and Angular.',
+      tags: ['Java', 'Spring Boot', 'Angular', 'TypeScript', 'GitHub Pages', 'Web Development', 'Software Design'],
+      repoUrl: ''
     }
   ],
   experience: [

@@ -18,10 +18,10 @@
 
     <div class="quick-list">
       <h3>Hobbies</h3>
-      <p>{{ person.hobbies.join(' · ') }}</p>
+      <p [innerHTML]="person.hobbies.join(' <br> ')"></p>
       <br>
-      <h3>Side Facts</h3>
-      <p>{{ person.facts.join(' · ') }}<br></p>
+      <h3>About me</h3>
+      <p [innerHTML]="person.facts.join(' <br> ')"></p>
     </div>
 
     <div class="github" *ngIf="githubOverview">
