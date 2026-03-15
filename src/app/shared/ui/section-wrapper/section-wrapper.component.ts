@@ -9,4 +9,5 @@ export class SectionWrapperComponent {
   @Input() id = '';
   @Input() title = '';
   @Input() kicker = '';
+  @Input() compact = false;
 }
