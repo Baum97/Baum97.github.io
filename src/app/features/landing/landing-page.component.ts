@@ -136,6 +136,29 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
+    // Experience carousel: jump to next/previous page on wheel scroll
+    if (this.activeSection === 'experience') {
+      const carousel = document.querySelector('.experience-carousel') as HTMLElement | null;
+      if (carousel) {
+        const direction: 1 | -1 = event.deltaY > 0 ? 1 : -1;
+        const pageWidth = carousel.clientWidth;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        const isFirstPage = carousel.scrollLeft < 1;
+        const isLastPage = carousel.scrollLeft >= maxScroll - 1;
+
+        // Allow section navigation if at carousel boundaries
+        if ((direction < 0 && isFirstPage) || (direction > 0 && isLastPage)) {
+          // Let normal section snap logic handle it
+        } else {
+          // Jump to next/previous carousel page
+          const newScrollLeft = carousel.scrollLeft + direction * pageWidth;
+          event.preventDefault();
+          carousel.scrollLeft = Math.max(0, Math.min(maxScroll, newScrollLeft));
+          return;
+        }
+      }
+    }
+
     if (this.isSectionScrolling) {
       event.preventDefault();
       return;
