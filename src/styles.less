@@ -14,10 +14,16 @@ body {
 	scroll-behavior: smooth;
 }
 
+@media (min-width: 901px) {
+	html,
+	body {
+		scroll-snap-type: y mandatory;
+	}
+}
+
 @media (max-width: 900px) {
 	html,
 	body {
-
 		scroll-snap-type: none;
 	}
 }
