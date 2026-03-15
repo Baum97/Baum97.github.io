@@ -27,6 +27,7 @@
     align-items: baseline;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.25);
     padding-bottom: 0.3rem;
+    font-size: smaller;
 
     a {
       color: #b3f4ff;
@@ -48,6 +49,29 @@
 }
 
 @media (max-width: 680px) {
+  .repo-list {
+    h3 {
+      font-size: 0.95rem;
+    }
+
+    li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      font-size: 0.88rem;
+
+      a {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+
+      span {
+        font-size: 0.78rem;
+        white-space: normal;
+      }
+    }
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
   }

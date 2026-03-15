@@ -21,17 +21,12 @@
     <app-projects-section [projects]="content.projects" [githubOverview]="githubOverview"></app-projects-section>
   </app-section-wrapper>
 
-  <app-section-wrapper id="experience">
+  <app-section-wrapper id="experience" class="mobile-tight-to-contact">
     <app-experience-section [items]="content.experience"></app-experience-section>
   </app-section-wrapper>
 
-  <app-section-wrapper id="contact" [title]="'Contact'" kicker="Reach Out">
+  <app-section-wrapper id="contact" class="mobile-tight-from-experience" [title]="'Contact'" kicker="Reach Out">
     <app-contact-section [content]="content.contact"></app-contact-section>
   </app-section-wrapper>
 </div>
 
-<app-mobile-nav
-  [items]="navItems"
-  [activeId]="activeSection"
-  (navigate)="scrollToSection($event)">
-</app-mobile-nav>
