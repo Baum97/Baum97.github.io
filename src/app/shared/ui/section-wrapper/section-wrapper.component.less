@@ -3,6 +3,8 @@
   padding: clamp(1.5rem, 3vw, 3rem);
 
   @media (max-width: 900px) {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
     height: auto;
     overflow: visible;
     padding-bottom: 1.5rem;
@@ -16,6 +18,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.section.compact .section-inner {
+  justify-content: flex-start;
+  min-height: unset;
+  padding-top: clamp(2rem, 6svh, 4rem);
 }
 
 .section-header {

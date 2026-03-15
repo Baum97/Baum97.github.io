@@ -17,6 +17,7 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
     {
       title: 'Traffic Flow Forecasting with LSTM',
       summary: 'Through',
+
       tags: ['Machine Learning', 'Deep Learning', 'Python', 'GitHub Actions', 'Data Science', 'Data Engineering', 'CI/CD', 'Software Design', 'Scientific Research', 'Simulation'],
       repoUrl: 'https://github.com/Baum97/Forecasting_of_individual_traffic'
     },

@@ -1,13 +1,15 @@
-<div class="projects-grid">
-  <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
-</div>
+<div class="projects-section">
+  <div class="projects-grid">
+    <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
+  </div>
 
-<div class="repo-list" *ngIf="githubOverview?.topRepos?.length">
-  <h3>Top GitHub Repositories</h3>
-  <ul>
-    <li *ngFor="let repo of githubOverview?.topRepos">
-      <a [href]="repo.html_url" target="_blank" rel="noreferrer">{{ repo.name }}</a>
-      <span>{{ repo.language || 'n/a' }} · ★ {{ repo.stargazers_count }}</span>
-    </li>
-  </ul>
+  <div class="repo-list" *ngIf="githubOverview?.topRepos?.length">
+    <h3>Top GitHub Repositories</h3>
+    <ul>
+      <li *ngFor="let repo of githubOverview?.topRepos">
+        <a [href]="repo.html_url" target="_blank" rel="noreferrer">{{ repo.name }}</a>
+        <span>{{ repo.language || 'n/a' }} · ★ {{ repo.stargazers_count }}</span>
+      </li>
+    </ul>
+  </div>
 </div>
