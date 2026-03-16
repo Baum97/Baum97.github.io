@@ -1,11 +1,15 @@
 .section {
   min-height: 100svh;
   padding: clamp(1.5rem, 3vw, 3rem);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 
   @media (max-width: 900px) {
     height: auto;
     overflow: visible;
     padding-bottom: 1.5rem;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 }
 
