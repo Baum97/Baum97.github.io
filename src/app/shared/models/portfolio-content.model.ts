@@ -16,7 +16,7 @@ export interface ProjectContent {
   title: string;
   summary: string;
   tags: string[];
-  repoUrl: string;
+  repoUrl?: string;
   liveUrl?: string;
 }
 

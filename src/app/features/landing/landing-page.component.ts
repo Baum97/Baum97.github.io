@@ -76,9 +76,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private hoveredElement: Element | null = null;
   private readonly reducedMotion =
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  private snappedSectionId: SectionId | null = null;
-  private snappedScrollY = 0;
-  private readonly snapThreshold = 100;
 
   constructor(private readonly githubService: GithubService) {}
 
@@ -262,13 +259,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private updateActiveSection(): void {
     const currentScroll = window.scrollY + window.innerHeight * 0.35;
 
-    // Check if we're within snap threshold distance
-    if (this.snappedSectionId && this.isWithinSnapThreshold(currentScroll)) {
-      return;
-    }
-
-    let foundSection: SectionId | null = null;
-
     this.navItems.forEach((item) => {
       const section = document.getElementById(item.id);
       if (!section) {
@@ -279,24 +269,9 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
       const bottom = top + section.offsetHeight;
 
       if (currentScroll >= top && currentScroll < bottom) {
-        foundSection = item.id;
+        this.activeSection = item.id;
       }
     });
-
-    if (foundSection && foundSection !== this.activeSection) {
-      this.activeSection = foundSection;
-      this.snappedSectionId = foundSection;
-      this.snappedScrollY = window.scrollY;
-    }
-  }
-
-  private isWithinSnapThreshold(currentScroll: number): boolean {
-    if (!this.snappedSectionId) {
-      return false;
-    }
-
-    const scrollDistance = Math.abs(window.scrollY - this.snappedScrollY);
-    return scrollDistance < this.snapThreshold;
   }
 
   private setupCanvas(): void {

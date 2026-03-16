@@ -6,7 +6,7 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
     name: 'Achim Baumgaertner',
     role: 'Software Engineer',
     intro: 'I build practical high quality software products with Angular, TypeScript, Java, Python, C# and clean architecture, with a focus on maintainability and measurable delivery impact.',
-    location: 'Stuttgart Region, Germany',
+    location: 'Stuttgart Region, Germany • Open to relocation',
     availability: 'Open to software engineering opportunities',
     avatarPath: 'assets/img/Untitled.png',
     skills: ['React', 'JavaScript', 'Angular', 'TypeScript', 'Java', 'Python', 'C#', 'Spring Boot', 'REST APIs', 'CI/CD', 'Machine Learning', 'Deep Learning', 'Agentic Development', ],
@@ -15,8 +15,8 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
   },
   projects: [
     {
-      title: 'Traffic Flow Forecasting with LSTM',
-      summary: 'Through',
+      title: 'Traffic Flow Forecasting with Machine Learning',
+      summary: 'WORK IN PROGRESS: Developing a machine learning model to predict individual traffic flow, utilizing Python for data processing and model training, and GitHub Actions for CI/CD automation.',
 
       tags: ['Machine Learning', 'Deep Learning', 'Python', 'GitHub Actions', 'Data Science', 'Data Engineering', 'CI/CD', 'Software Design', 'Scientific Research', 'Simulation'],
       repoUrl: 'https://github.com/Baum97/Forecasting_of_individual_traffic'
@@ -28,16 +28,21 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
       repoUrl: 'https://github.com/Baum97/Bidirectional-Charging-Stations'
     },
     {
-      title: 'Role-Based Time Tracking System',
-      summary: 'Implemented an electronic time tracking solution with role and permission management plus database integration.',
-      tags: ['Java', 'JavaFX', 'Database', 'Software Design', 'FullStack', 'Desktop Application'],
-      repoUrl: 'https://github.com/Baum97/timeMgmt'
-    },
-    {
       title: 'E-Vehicle Charging Station WebApp ',
       summary: 'Designed, delegated and developed a web application for locating and managing electric vehicle charging stations, featuring interactive maps and user-friendly interfaces. Lead a team of 4, coordinated development efforts, and implemented core features using Java, Spring Boot, TypeScript and Angular.',
       tags: ['Java', 'Spring Boot', 'Angular', 'TypeScript', 'GitHub Pages', 'Web Development', 'Software Design'],
       repoUrl: ''
+    },
+    {
+      title: 'Role-Based Time Tracking System',
+      summary: 'Implemented an electronic time tracking solution with role and permission management plus database integration.',
+      tags: ['Java', 'JavaFX', 'MySQL', 'Software Design', 'FullStack', 'Desktop Application'],
+      repoUrl: 'https://github.com/Baum97/timeMgmt'
+    },
+    {
+      title: 'Library Management System',
+      summary: 'Designed and implemented a library management system with user authentication, book inventory management, borrowing features and publication/removal functionality.',
+      tags: ['Java', 'JavaFX', 'PostgreSQL', 'FullStack', 'Desktop Application']
     }
   ],
   experience: [
