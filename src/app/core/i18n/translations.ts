@@ -31,5 +31,19 @@ export const UI_TEXT: Record<string, Record<Lang, string>> = {
   tutorial_got_it: { en: 'Got it', de: 'Verstanden' },
   experience_pages: { en: 'Experience pages', de: 'Erfahrungs-Seiten' },
   experience_page_label: { en: 'Show experience page', de: 'Erfahrungs-Seite anzeigen' },
-  work_experience: { en: 'Work experience', de: 'Berufserfahrung' }
+  work_experience: { en: 'Work experience', de: 'Berufserfahrung' },
+  chatbot_title: { en: 'HelperBot', de: 'HelperBot' },
+  chatbot_subtitle: { en: 'Ask me about Achim', de: 'Frag mich über Achim' },
+  chatbot_open: { en: 'Open chat', de: 'Chat öffnen' },
+  chatbot_close: { en: 'Close chat', de: 'Chat schließen' },
+  chatbot_send: { en: 'Send', de: 'Senden' },
+  chatbot_placeholder: { en: 'Type a question…', de: 'Frage stellen…' },
+  chatbot_error: {
+    en: 'Sorry, something went wrong. Please try again in a moment.',
+    de: 'Etwas ist schiefgelaufen. Bitte gleich nochmal versuchen.'
+  },
+  chatbot_hint: {
+    en: 'Got questions about Achim? Just ask!',
+    de: 'Fragen zu Achim? Frag mich einfach!'
+  }
 };

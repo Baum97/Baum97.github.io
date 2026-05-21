@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { ExperienceSectionComponent } from './features/experience/experience-sec
 import { ContactSectionComponent } from './features/contact/contact-section.component';
 import { LangToggleComponent } from './shared/ui/lang-toggle/lang-toggle.component';
 import { TranslatePipe } from './core/i18n/translate.pipe';
+import { ChatbotComponent } from './features/chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,15 @@ import { TranslatePipe } from './core/i18n/translate.pipe';
     ExperienceSectionComponent,
     ContactSectionComponent,
     LangToggleComponent,
-    TranslatePipe
+    TranslatePipe,
+    ChatbotComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgOptimizedImage,
+    FormsModule,
   ],
   bootstrap: [AppComponent]
 })

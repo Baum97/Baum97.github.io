@@ -7,6 +7,7 @@
 </div>
 
 <app-lang-toggle></app-lang-toggle>
+<app-chatbot></app-chatbot>
 
 <button
   type="button"
@@ -37,7 +38,7 @@
 
 <app-dot-nav
   class="desktop-nav"
-  [items]="navItems"
+  [items]="dotNavItems"
   [activeId]="activeSection"
   (navigate)="scrollToSection($event)">
 </app-dot-nav>

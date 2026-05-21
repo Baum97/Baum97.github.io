@@ -4,6 +4,7 @@ import { Lang, UI_TEXT } from './translations';
 
 const STORAGE_KEY = 'baum97.lang';
 const TUTORIAL_KEY = 'baum97.langTutorial.seen';
+const CHAT_HINT_KEY = 'baum97.chatHint.seen';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
@@ -57,6 +58,20 @@ export class LanguageService {
   markTutorialSeen(): void {
     try {
       localStorage.setItem(TUTORIAL_KEY, '1');
+    } catch {}
+  }
+
+  hasSeenChatHint(): boolean {
+    try {
+      return localStorage.getItem(CHAT_HINT_KEY) === '1';
+    } catch {
+      return false;
+    }
+  }
+
+  markChatHintSeen(): void {
+    try {
+      localStorage.setItem(CHAT_HINT_KEY, '1');
     } catch {}
   }
 

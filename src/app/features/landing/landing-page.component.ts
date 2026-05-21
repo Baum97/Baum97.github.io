@@ -43,6 +43,10 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   content: PortfolioContent;
   navItems: NavItem[];
 
+  get dotNavItems(): NavItem[] {
+    return this.navItems.filter((item) => item.id !== 'contact');
+  }
+
   activeSection: SectionId = 'person';
   githubOverview: GithubOverview | null = null;
   private langSub?: Subscription;

@@ -9,7 +9,8 @@ export const environment = {
     username: 'Baum97',
     repoLimit: 5,
     endpoint: 'https://api.github.com'
-  }
+  },
+  chatEndpoint: '/api/chat'
 };
 
 /*
