@@ -137,7 +137,7 @@ export const PORTFOLIO_CONTENT_DE: PortfolioContent = {
     },
     {
       title: 'Bibliotheksverwaltungssystem',
-      summary: 'Konzeption und Umsetzung eines Bibliotheksverwaltungssystems mit Benutzerauthentifizierung, Buchbestandsverwaltung, Ausleih- sowie Veröffentlichungs-/Entfernungsfunktionen.',
+      summary: 'Konzeption und Umsetzung eines Bibliotheksverwaltungssystems mit Benutzerauthentifizierung, Buchbestandsverwaltung, Ausleih- sowie Veröffentlichungs-/ Entfernungsfunktionen.',
       tags: ['Java', 'JavaFX', 'PostgreSQL', 'FullStack', 'Desktop-Anwendung']
     }
   ],
