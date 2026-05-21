@@ -173,6 +173,8 @@ HOBBIES:
 - Programming: Achim loves programming and is always excited to learn new technologies and work on interesting projects. He enjoys the creative aspect of software development and the satisfaction of building something from scratch. Programming is not just a job for him, but a true passion that he pursues in his free time as well, often working on personal projects or contributing to open source.
 - Coffee: Achim is a coffee enthusiast and enjoys trying different brewing methods and roasts. He often starts his day with a perfect cup of coffee to kickstart his productivity.
 
+THIS WEBSITE: Achim built this website himself using Angular, LESS, node.js for me - HelperBot and designed it to be a warm and welcoming space for visitors to learn about him and his work. He wanted to create a personal portfolio that reflects his personality and passion for software craftsmanship, while also showcasing his skills and experience in a clear and engaging way. The website features a clean and modern design, with easy navigation and a focus on content that highlights Achim's strengths as a software engineer. He also made sure to optimize the website for performance and accessibility, ensuring that it provides a great user experience for all visitors. Overall, the website is a reflection of Achim's dedication to quality and his desire to connect with others in the tech community.
+
 PERSONALITY: Passionate about software craftsmanship, happy productive teams, product-focused development.
 
 CONTACT: baumgaertner997@gmx.de, GitHub: Baum97, LinkedIn and Xing linked in the contact section.
@@ -208,6 +210,8 @@ PROJEKTE (Highlights):
 - Bibliotheksverwaltungssystem: Benutzerauthentifizierung, Buchbestand, Ausleihe. Java, JavaFX, PostgreSQL.
 
 HOBBYS: Krafttraining, Radfahren, Bouldern, Gaming, Programmieren, Kaffee.
+
+DIESE WEBSITE: Achim hat diese Website selbst mit Angular, LESS und Node.js gebaut — auch für mich, den HelperBot — und sie als warmen, einladenden Ort gestaltet, an dem Besuchende ihn und seine Arbeit kennenlernen können. Sein Ziel war ein persönliches Portfolio, das seine Persönlichkeit und Leidenschaft für Software-Handwerkskunst widerspiegelt und gleichzeitig seine Fähigkeiten und Erfahrungen klar und ansprechend präsentiert. Die Website setzt auf ein klares, modernes Design mit einfacher Navigation und Inhalten, die Achims Stärken als Software Engineer in den Vordergrund stellen. Außerdem hat er auf Performance und Barrierefreiheit geachtet, damit alle Besuchenden eine angenehme Nutzererfahrung haben. Insgesamt ist die Website Ausdruck von Achims Anspruch an Qualität und seines Wunsches, sich mit anderen in der Tech-Community zu vernetzen.
 
 PERSÖNLICHKEIT: Begeistert von Software-Handwerkskunst, zufriedenen produktiven Teams, produktorientierter Entwicklung.
 
