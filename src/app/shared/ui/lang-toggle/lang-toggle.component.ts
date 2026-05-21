@@ -4,6 +4,7 @@ import { LanguageService } from '../../../core/i18n/language.service';
 import { Lang } from '../../../core/i18n/translations';
 
 @Component({
+  standalone: false,
   selector: 'app-lang-toggle',
   templateUrl: './lang-toggle.component.html',
   styleUrls: ['./lang-toggle.component.less'],

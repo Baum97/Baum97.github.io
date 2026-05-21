@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { NgOptimizedImage } from '@angular/common';
 import { LandingPageComponent } from './features/landing/landing-page.component';
 import { SectionWrapperComponent } from './shared/ui/section-wrapper/section-wrapper.component';
@@ -40,10 +40,10 @@ import { ChatbotComponent } from './features/chatbot/chatbot.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     NgOptimizedImage,
     FormsModule,
   ],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

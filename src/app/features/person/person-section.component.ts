@@ -3,6 +3,7 @@ import { GithubOverview } from '../../shared/models/github.model';
 import { PersonContent } from '../../shared/models/portfolio-content.model';
 
 @Component({
+  standalone: false,
   selector: 'app-person-section',
   templateUrl: './person-section.component.html',
   styleUrls: ['./person-section.component.less']

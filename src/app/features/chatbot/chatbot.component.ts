@@ -14,6 +14,7 @@ import { LanguageService } from '../../core/i18n/language.service';
 import { Lang } from '../../core/i18n/translations';
 
 @Component({
+  standalone: false,
   selector: 'app-chatbot',
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.less'],

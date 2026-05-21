@@ -7,6 +7,7 @@ export interface NavItem {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-dot-nav',
   templateUrl: './dot-nav.component.html',
   styleUrls: ['./dot-nav.component.less']

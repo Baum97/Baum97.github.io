@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ExperienceItem } from '../../shared/models/portfolio-content.model';
 
 @Component({
+  standalone: false,
   selector: 'app-experience-section',
   templateUrl: './experience-section.component.html',
   styleUrls: ['./experience-section.component.less']

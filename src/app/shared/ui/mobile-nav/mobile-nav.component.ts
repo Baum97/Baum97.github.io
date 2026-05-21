@@ -3,6 +3,7 @@ import { SectionId } from '../../models/portfolio-content.model';
 import { NavItem } from '../dot-nav/dot-nav.component';
 
 @Component({
+  standalone: false,
   selector: 'app-mobile-nav',
   templateUrl: './mobile-nav.component.html',
   styleUrls: ['./mobile-nav.component.less']
