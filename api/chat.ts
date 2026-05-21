@@ -1,8 +1,3 @@
-export const config = {
-  runtime: 'nodejs',
-  maxDuration: 30
-};
-
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
 
 const ALLOWED_ORIGINS = new Set([
@@ -17,59 +12,59 @@ const MAX_INPUT_CHARS = 4000;
 const MAX_HISTORY = 12;
 
 export default async function handler(req: any, res: any) {
-  const origin = req.headers?.origin;
-  if (origin && ALLOWED_ORIGINS.has(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Vary', 'Origin');
-  }
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    res.status(204).end();
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
-  }
-
-  const apiKey = process.env['GEMINI_API_KEY'];
-  if (!apiKey) {
-    res.status(500).json({ error: 'Server misconfiguration: missing GEMINI_API_KEY' });
-    return;
-  }
-
-  let payload: { messages?: ChatMessage[]; lang?: 'de' | 'en' };
   try {
-    payload = typeof req.body === 'string' ? JSON.parse(req.body) : req.body ?? {};
-  } catch {
-    res.status(400).json({ error: 'Invalid JSON' });
-    return;
-  }
+    const origin = req.headers?.origin;
+    if (origin && ALLOWED_ORIGINS.has(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Vary', 'Origin');
+    }
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  const lang: 'de' | 'en' = payload.lang === 'de' ? 'de' : 'en';
-  const messages = Array.isArray(payload.messages) ? payload.messages : [];
+    if (req.method === 'OPTIONS') {
+      res.status(204).end();
+      return;
+    }
 
-  const sanitized = messages
-    .filter((m) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
-    .slice(-MAX_HISTORY)
-    .map((m) => ({ role: m.role, content: m.content.slice(0, MAX_INPUT_CHARS) }));
+    if (req.method !== 'POST') {
+      res.status(405).json({ error: 'Method not allowed' });
+      return;
+    }
 
-  if (sanitized.length === 0 || sanitized[sanitized.length - 1].role !== 'user') {
-    res.status(400).json({ error: 'Last message must be from user' });
-    return;
-  }
+    const apiKey = process.env['GEMINI_API_KEY'];
+    if (!apiKey) {
+      res.status(500).json({ error: 'Server misconfiguration: missing GEMINI_API_KEY' });
+      return;
+    }
 
-  const geminiContents = sanitized.map((m) => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.content }]
-  }));
+    let payload: { messages?: ChatMessage[]; lang?: 'de' | 'en' };
+    try {
+      payload = typeof req.body === 'string' ? JSON.parse(req.body) : req.body ?? {};
+    } catch {
+      res.status(400).json({ error: 'Invalid JSON' });
+      return;
+    }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`;
+    const lang: 'de' | 'en' = payload.lang === 'de' ? 'de' : 'en';
+    const messages = Array.isArray(payload.messages) ? payload.messages : [];
 
-  try {
+    const sanitized = messages
+      .filter((m) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+      .slice(-MAX_HISTORY)
+      .map((m) => ({ role: m.role, content: m.content.slice(0, MAX_INPUT_CHARS) }));
+
+    if (sanitized.length === 0 || sanitized[sanitized.length - 1].role !== 'user') {
+      res.status(400).json({ error: 'Last message must be from user' });
+      return;
+    }
+
+    const geminiContents = sanitized.map((m) => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }]
+    }));
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`;
+
     const upstream = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -86,7 +81,7 @@ export default async function handler(req: any, res: any) {
 
     if (!upstream.ok) {
       const detail = await upstream.text();
-      res.status(upstream.status).json({ error: 'Upstream error', detail: detail.slice(0, 500) });
+      res.status(upstream.status).json({ error: 'Upstream error', detail: detail.slice(0, 800) });
       return;
     }
 
@@ -97,13 +92,18 @@ export default async function handler(req: any, res: any) {
       .trim();
 
     if (!reply) {
-      res.status(502).json({ error: 'Empty reply from model' });
+      res.status(502).json({ error: 'Empty reply from model', detail: JSON.stringify(data).slice(0, 800) });
       return;
     }
 
     res.status(200).json({ reply });
   } catch (error: any) {
-    res.status(500).json({ error: error?.message ?? 'Unknown error' });
+    console.error('[/api/chat] handler error', error);
+    res.status(500).json({
+      error: 'Handler crashed',
+      detail: error?.message ?? String(error),
+      stack: (error?.stack ?? '').slice(0, 800)
+    });
   }
 }
 
