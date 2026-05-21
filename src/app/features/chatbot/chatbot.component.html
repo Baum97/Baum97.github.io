@@ -75,7 +75,10 @@
       <span class="dot"></span><span class="dot"></span><span class="dot"></span>
     </article>
 
-    <p *ngIf="errorKey" class="chat-error" role="alert">{{ errorKey | t }}</p>
+    <p *ngIf="errorKey" class="chat-error" role="alert">
+      {{ errorKey | t }}
+      <span *ngIf="errorDetail" class="chat-error__detail">{{ errorDetail }}</span>
+    </p>
 
     <div #scrollAnchor></div>
   </div>

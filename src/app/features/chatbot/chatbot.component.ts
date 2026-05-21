@@ -29,6 +29,7 @@ export class ChatbotComponent implements OnInit, OnDestroy, AfterViewChecked {
   draft = '';
   messages: ChatMessage[] = [];
   errorKey: string | null = null;
+  errorDetail: string | null = null;
   showHint = false;
 
   private langSub?: Subscription;
@@ -128,12 +129,20 @@ export class ChatbotComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.shouldScroll = true;
         this.cdr.markForCheck();
       },
-      error: () => {
+      error: (err) => {
         this.isSending = false;
         this.errorKey = 'chatbot_error';
+        this.errorDetail = this.formatError(err);
         this.cdr.markForCheck();
       }
     });
+  }
+
+  private formatError(err: unknown): string {
+    const e: any = err;
+    const status = e?.status ?? '';
+    const upstream = e?.error?.error ?? e?.error?.detail ?? e?.message ?? '';
+    return [status && `HTTP ${status}`, upstream].filter(Boolean).join(' — ').slice(0, 300);
   }
 
   private buildGreeting(lang: Lang): ChatMessage {
