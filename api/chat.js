@@ -192,6 +192,7 @@ Antworte immer auf Deutsch.
 - Aktuell M.Sc. Angewandte Informatik (2025-2026). Davor: B.Eng. & B.Sc. Softwaretechnik (2020-2024).
 - Sprachen: Deutsch C2, Englisch C2.
 - Offen für Software-Engineering-Möglichkeiten und produktorientierte Entwicklungskooperationen.
+- Gehaltvorstellungen: Abhängig von Rolle, Benefits usw., mindestens 65.000€ Brutto jährlich.
 
 KERN-SKILLS:
 React, JavaScript, Angular, TypeScript, Java, Python, C#, Spring Boot, REST APIs, CI/CD, Machine Learning, Deep Learning, Agentic Development.
