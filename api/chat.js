@@ -1,5 +1,3 @@
-type ChatMessage = { role: 'user' | 'assistant'; content: string };
-
 const ALLOWED_ORIGINS = new Set([
   'https://baumgaertner.works',
   'https://www.baumgaertner.works',
@@ -11,9 +9,9 @@ const MAX_OUTPUT_TOKENS = 600;
 const MAX_INPUT_CHARS = 4000;
 const MAX_HISTORY = 12;
 
-export default async function handler(req: any, res: any) {
+module.exports = async function handler(req, res) {
   try {
-    const origin = req.headers?.origin;
+    const origin = req.headers && req.headers.origin;
     if (origin && ALLOWED_ORIGINS.has(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
       res.setHeader('Vary', 'Origin');
@@ -31,21 +29,21 @@ export default async function handler(req: any, res: any) {
       return;
     }
 
-    const apiKey = process.env['GEMINI_API_KEY'];
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       res.status(500).json({ error: 'Server misconfiguration: missing GEMINI_API_KEY' });
       return;
     }
 
-    let payload: { messages?: ChatMessage[]; lang?: 'de' | 'en' };
+    let payload;
     try {
-      payload = typeof req.body === 'string' ? JSON.parse(req.body) : req.body ?? {};
-    } catch {
+      payload = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+    } catch (e) {
       res.status(400).json({ error: 'Invalid JSON' });
       return;
     }
 
-    const lang: 'de' | 'en' = payload.lang === 'de' ? 'de' : 'en';
+    const lang = payload.lang === 'de' ? 'de' : 'en';
     const messages = Array.isArray(payload.messages) ? payload.messages : [];
 
     const sanitized = messages
@@ -63,7 +61,11 @@ export default async function handler(req: any, res: any) {
       parts: [{ text: m.content }]
     }));
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`;
+    const url =
+      'https://generativelanguage.googleapis.com/v1beta/models/' +
+      MODEL +
+      ':generateContent?key=' +
+      encodeURIComponent(apiKey);
 
     const upstream = await fetch(url, {
       method: 'POST',
@@ -85,11 +87,9 @@ export default async function handler(req: any, res: any) {
       return;
     }
 
-    const data: any = await upstream.json();
-    const reply = (data?.candidates?.[0]?.content?.parts ?? [])
-      .map((p: any) => p?.text ?? '')
-      .join('\n')
-      .trim();
+    const data = await upstream.json();
+    const parts = (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
+    const reply = parts.map((p) => (p && p.text) || '').join('\n').trim();
 
     if (!reply) {
       res.status(502).json({ error: 'Empty reply from model', detail: JSON.stringify(data).slice(0, 800) });
@@ -97,17 +97,17 @@ export default async function handler(req: any, res: any) {
     }
 
     res.status(200).json({ reply });
-  } catch (error: any) {
+  } catch (error) {
     console.error('[/api/chat] handler error', error);
     res.status(500).json({
       error: 'Handler crashed',
-      detail: error?.message ?? String(error),
-      stack: (error?.stack ?? '').slice(0, 800)
+      detail: (error && error.message) || String(error),
+      stack: (error && error.stack ? String(error.stack) : '').slice(0, 800)
     });
   }
-}
+};
 
-function buildSystemPrompt(lang: 'de' | 'en'): string {
+function buildSystemPrompt(lang) {
   return lang === 'de' ? PERSONA_DE : PERSONA_EN;
 }
 
