@@ -1,25 +1,19 @@
 .section {
-  min-height: 100svh;
-  padding: clamp(1.5rem, 3vw, 3rem);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  padding: clamp(1rem, 2vw, 2rem) clamp(1.5rem, 3vw, 3rem);
 
   @media (max-width: 900px) {
     height: auto;
     overflow: visible;
-    padding-bottom: 1.5rem;
-    scroll-snap-align: none;
-    scroll-snap-stop: normal;
+    padding-bottom: 1rem;
   }
 }
 
 .section-inner {
   max-width: 1120px;
   margin: 0 auto;
-  min-height: calc(100svh - 3rem);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .section.compact .section-inner {

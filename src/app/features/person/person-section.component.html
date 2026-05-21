@@ -17,16 +17,16 @@
   <aside class="person-side">
 
     <div class="quick-list">
-      <h3>Hobbies</h3>
+      <h3>{{ 'hobbies' | t }}</h3>
       <p [innerHTML]="person.hobbies.join(' <br> ')"></p>
       <br>
-      <h3>About me</h3>
+      <h3>{{ 'about_me' | t }}</h3>
       <p [innerHTML]="person.facts.join(' <br> ')"></p>
     </div>
 
     <div class="github" *ngIf="githubOverview">
       <strong>{{ githubOverview.profileName }}</strong>
-      <p>&#64;{{ githubOverview.username }} | {{ githubOverview.publicRepos }} public repos | {{ githubOverview.followers }} followers</p>
+      <p>&#64;{{ githubOverview.username }} | {{ githubOverview.publicRepos }} {{ 'public_repos' | t }} | {{ githubOverview.followers }} {{ 'followers' | t }}</p>
 
     </div>
   </aside>

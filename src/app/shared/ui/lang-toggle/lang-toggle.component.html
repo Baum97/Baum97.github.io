@@ -1,0 +1,45 @@
+<div class="lang-toggle" role="group" aria-label="Language switcher">
+  <button
+    type="button"
+    class="flag-btn"
+    [class.active]="current === 'de'"
+    [attr.aria-pressed]="current === 'de'"
+    [attr.aria-label]="'lang_de' | t"
+    [title]="'lang_de' | t"
+    (click)="select('de')">
+    <svg viewBox="0 0 5 3" class="flag" aria-hidden="true">
+      <rect width="5" height="1" y="0" fill="#000"></rect>
+      <rect width="5" height="1" y="1" fill="#D00"></rect>
+      <rect width="5" height="1" y="2" fill="#FFCE00"></rect>
+    </svg>
+  </button>
+
+  <button
+    type="button"
+    class="flag-btn"
+    [class.active]="current === 'en'"
+    [attr.aria-pressed]="current === 'en'"
+    [attr.aria-label]="'lang_en' | t"
+    [title]="'lang_en' | t"
+    (click)="select('en')">
+    <svg viewBox="0 0 60 30" class="flag" aria-hidden="true">
+      <clipPath id="t-uk"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"></path></clipPath>
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169"></path>
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path>
+      <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t-uk)" stroke="#C8102E" stroke-width="4"></path>
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"></path>
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"></path>
+    </svg>
+  </button>
+</div>
+
+<div class="lang-tutorial" *ngIf="showTutorial" (click)="dismissTutorial()">
+  <div class="tutorial-bubble" (click)="$event.stopPropagation()">
+    <svg class="tutorial-arrow" viewBox="0 0 80 60" aria-hidden="true">
+      <path d="M5,55 C30,40 50,25 70,10 M70,10 L60,18 M70,10 L62,2"
+        fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <p>{{ 'tutorial_text' | t }}</p>
+    <button type="button" class="tutorial-dismiss" (click)="dismissTutorial()">{{ 'tutorial_got_it' | t }}</button>
+  </div>
+</div>

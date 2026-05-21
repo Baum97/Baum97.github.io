@@ -6,29 +6,31 @@
   <div class="grid"></div>
 </div>
 
+<app-lang-toggle></app-lang-toggle>
+
 <button
   type="button"
   class="hamburger"
   [class.hamburger--open]="isMenuOpen"
   [attr.aria-expanded]="isMenuOpen"
   aria-controls="intro-menu"
-  aria-label="Toggle intro menu"
+  [attr.aria-label]="'toggle_menu' | t"
   (click)="toggleMenu()">
   <span class="bar"></span>
   <span class="bar"></span>
   <span class="bar"></span>
 </button>
 
-<aside id="intro-menu" class="intro-drawer" [class.intro-drawer--open]="isMenuOpen" aria-label="Intro menu">
+<aside id="intro-menu" class="intro-drawer" [class.intro-drawer--open]="isMenuOpen" [attr.aria-label]="'background_effects' | t">
 
 
-  <div class="drawer-title">Background Effects</div>
+  <div class="drawer-title">{{ 'background_effects' | t }}</div>
   <button type="button" class="effect-toggle" [class.effect-toggle--active]="networkEnabled" (click)="toggleEffect('network')">
-    Neural Net
+    {{ 'neural_net' | t }}
     <span class="toggle-track"><span class="toggle-thumb"></span></span>
   </button>
   <button type="button" class="effect-toggle" [class.effect-toggle--active]="sparksEnabled" (click)="toggleEffect('sparks')">
-    Sparks
+    {{ 'sparks' | t }}
     <span class="toggle-track"><span class="toggle-thumb"></span></span>
   </button>
 </aside>
@@ -43,11 +45,11 @@
 <app-mobile-nav [items]="navItems" [activeId]="activeSection" (navigate)="scrollToSection($event)"></app-mobile-nav>
 
 <div class="sections">
-  <app-section-wrapper id="person" [title]="'Hi, I am:'" kicker="Intro">
+  <app-section-wrapper id="person" [title]="'hi_i_am' | t" [kicker]="'intro' | t">
     <app-person-section [person]="content.person" [githubOverview]="githubOverview"></app-person-section>
   </app-section-wrapper>
 
-  <app-section-wrapper id="projects" [title]="'Displayed Work'" kicker="Projects">
+  <app-section-wrapper id="projects" [title]="'displayed_work' | t" [kicker]="'projects_kicker' | t">
     <app-projects-section [projects]="content.projects" [githubOverview]="githubOverview"></app-projects-section>
   </app-section-wrapper>
 
@@ -55,7 +57,7 @@
     <app-experience-section [items]="content.experience"></app-experience-section>
   </app-section-wrapper>
 
-  <app-section-wrapper id="contact" class="mobile-tight-from-experience" [title]="'Contact'" kicker="Reach Out">
+  <app-section-wrapper id="contact" class="mobile-tight-from-experience" [title]="'contact_title' | t" [kicker]="'reach_out' | t">
 
     <app-contact-section [content]="content.contact"></app-contact-section>
   </app-section-wrapper>

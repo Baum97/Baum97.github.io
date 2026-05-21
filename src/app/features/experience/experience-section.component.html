@@ -1,14 +1,14 @@
 <div class="experience-shell">
   <div class="experience-header">
-    <h1>Experience</h1>
+    <h1>{{ 'experience_title' | t }}</h1>
 
-    <div class="pager-dots" *ngIf="pageCount > 1" aria-label="Experience pages">
+    <div class="pager-dots" *ngIf="pageCount > 1" [attr.aria-label]="'experience_pages' | t">
       <button
         *ngFor="let page of pagedItems; let index = index"
         type="button"
         class="pager-dot"
         [class.active]="index === activePage"
-        [attr.aria-label]="'Show experience page ' + (index + 1)"
+        [attr.aria-label]="('experience_page_label' | t) + ' ' + (index + 1)"
         [attr.aria-current]="index === activePage ? 'page' : null"
         (click)="goToPage(index)">
       </button>
@@ -18,7 +18,7 @@
   <div
     #carousel
     class="experience-carousel"
-    aria-label="Work experience"
+    [attr.aria-label]="'work_experience' | t"
     (scroll)="onCarouselScroll($event)">
     <section class="experience-page" *ngFor="let page of pagedItems">
       <ul class="experience-list">

@@ -1,9 +1,17 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
 .project-card {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 1.2rem;
   background: rgba(8, 21, 33, 0.66);
   backdrop-filter: blur(14px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   h3 {
     margin: 0 0 0.7rem;
@@ -24,7 +32,8 @@
 }
 
 .links {
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
   display: flex;
   gap: 1rem;
 

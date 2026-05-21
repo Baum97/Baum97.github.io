@@ -15,6 +15,8 @@ import { PersonSectionComponent } from './features/person/person-section.compone
 import { ProjectsSectionComponent } from './features/projects/projects-section.component';
 import { ExperienceSectionComponent } from './features/experience/experience-section.component';
 import { ContactSectionComponent } from './features/contact/contact-section.component';
+import { LangToggleComponent } from './shared/ui/lang-toggle/lang-toggle.component';
+import { TranslatePipe } from './core/i18n/translate.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ContactSectionComponent } from './features/contact/contact-section.comp
     PersonSectionComponent,
     ProjectsSectionComponent,
     ExperienceSectionComponent,
-    ContactSectionComponent
+    ContactSectionComponent,
+    LangToggleComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
   </div>
 
   <div class="links">
-    <a *ngIf="project.repoUrl" [href]="project.repoUrl" target="_blank" rel="noreferrer">Repository</a>
-    <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" rel="noreferrer">Live</a>
+    <a *ngIf="project.repoUrl" [href]="project.repoUrl" target="_blank" rel="noreferrer">{{ 'repository' | t }}</a>
+    <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" rel="noreferrer">{{ 'live' | t }}</a>
   </div>
 </article>

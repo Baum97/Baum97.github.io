@@ -4,7 +4,7 @@
   </div>
 
   <div class="repo-list" *ngIf="githubOverview?.topRepos?.length">
-    <h3>Top GitHub Repositories</h3>
+    <h3>{{ 'top_repos' | t }}</h3>
     <ul>
       <li *ngFor="let repo of githubOverview?.topRepos">
         <a [href]="repo.html_url" target="_blank" rel="noreferrer">{{ repo.name }}</a>

@@ -7,11 +7,13 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { PORTFOLIO_CONTENT } from '../../content/portfolio-content';
+import { getPortfolioContent } from '../../content/portfolio-content';
 import { GithubService } from '../../core/data/github.service';
+import { LanguageService } from '../../core/i18n/language.service';
 import { GithubOverview } from '../../shared/models/github.model';
-import { SectionId } from '../../shared/models/portfolio-content.model';
+import { PortfolioContent, SectionId } from '../../shared/models/portfolio-content.model';
 import { NavItem } from '../../shared/ui/dot-nav/dot-nav.component';
 
 interface Spark {
@@ -38,16 +40,12 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('networkCanvas') networkCanvas?: ElementRef<HTMLCanvasElement>;
   @ViewChild('sparkCanvas') sparkCanvas?: ElementRef<HTMLCanvasElement>;
 
-  readonly content = PORTFOLIO_CONTENT;
-  readonly navItems: NavItem[] = [
-    { id: 'person', label: 'Person' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'contact', label: 'Contact' }
-  ];
+  content: PortfolioContent;
+  navItems: NavItem[];
 
   activeSection: SectionId = 'person';
   githubOverview: GithubOverview | null = null;
+  private langSub?: Subscription;
 
   isMenuOpen = false;
   networkEnabled = true;
@@ -61,14 +59,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private animationFrameId = 0;
   private networkContext: CanvasRenderingContext2D | null = null;
   private sparkContext: CanvasRenderingContext2D | null = null;
-  private accumulatedWheel = 0;
-  private isSectionScrolling = false;
-  private sectionScrollUnlockHandle: ReturnType<typeof setTimeout> | null = null;
-  private lastWheelDirection: 1 | -1 | 0 = 0;
-  private readonly wheelThreshold = 300;
-  private readonly edgeActivationPx = 100;
-  private readonly minEdgeThreshold = 300;
-  private readonly sectionScrollLockMs = 300;
   private canvasWidth = 0;
   private canvasHeight = 0;
   private pointerPosition = { x: 0, y: 0 };
@@ -77,7 +67,13 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly reducedMotion =
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  constructor(private readonly githubService: GithubService) {}
+  constructor(
+    private readonly githubService: GithubService,
+    private readonly i18n: LanguageService
+  ) {
+    this.content = getPortfolioContent(this.i18n.current);
+    this.navItems = this.buildNavItems();
+  }
 
   ngOnInit(): void {
     this.githubService
@@ -90,12 +86,24 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
         this.githubOverview = overview;
       });
 
+    this.langSub = this.i18n.current$.subscribe((lang) => {
+      this.content = getPortfolioContent(lang);
+      this.navItems = this.buildNavItems();
+    });
+
     this.updateActiveSection();
   }
 
-  ngAfterViewInit(): void {
-    window.addEventListener('wheel', this.handleWheel, { passive: false });
+  private buildNavItems(): NavItem[] {
+    return [
+      { id: 'person', label: this.i18n.t('nav_person') },
+      { id: 'projects', label: this.i18n.t('nav_projects') },
+      { id: 'experience', label: this.i18n.t('nav_experience') },
+      { id: 'contact', label: this.i18n.t('nav_contact') }
+    ];
+  }
 
+  ngAfterViewInit(): void {
     if (this.reducedMotion) {
       return;
     }
@@ -116,13 +124,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     document.removeEventListener('pointerover', this.handlePointerOver, true);
     document.removeEventListener('pointerout', this.handlePointerOut, true);
     document.removeEventListener('pointermove', this.handlePointerMove, true);
-    window.removeEventListener('wheel', this.handleWheel);
     window.removeEventListener('resize', this.handleResize);
-
-    if (this.sectionScrollUnlockHandle) {
-      clearTimeout(this.sectionScrollUnlockHandle);
-      this.sectionScrollUnlockHandle = null;
-    }
+    this.langSub?.unsubscribe();
   }
 
   @HostListener('window:scroll')
@@ -130,101 +133,8 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateActiveSection();
   }
 
-  private readonly handleWheel = (event: WheelEvent): void => {
-    if (window.innerWidth <= 900) {
-      return;
-    }
-
-    // Experience carousel: jump to next/previous page on wheel scroll
-    if (this.activeSection === 'experience') {
-      const carousel = document.querySelector('.experience-carousel') as HTMLElement | null;
-      if (carousel) {
-        const direction: 1 | -1 = event.deltaY > 0 ? 1 : -1;
-        const pageWidth = carousel.clientWidth;
-        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-        const isFirstPage = carousel.scrollLeft < 1;
-        const isLastPage = carousel.scrollLeft >= maxScroll - 1;
-
-        // Allow section navigation if at carousel boundaries
-        if ((direction < 0 && isFirstPage) || (direction > 0 && isLastPage)) {
-          // Let normal section snap logic handle it
-        } else {
-          // Jump to next/previous carousel page
-          const newScrollLeft = carousel.scrollLeft + direction * pageWidth;
-          event.preventDefault();
-          carousel.scrollLeft = Math.max(0, Math.min(maxScroll, newScrollLeft));
-          return;
-        }
-      }
-    }
-
-    if (this.isSectionScrolling) {
-      event.preventDefault();
-      return;
-    }
-
-    const direction: 1 | -1 = event.deltaY > 0 ? 1 : -1;
-    const currentIndex = this.getCurrentSectionIndex();
-    const activeSectionId = this.navItems[currentIndex]?.id;
-    const activeSection = activeSectionId ? document.getElementById(activeSectionId) : null;
-
-    if (!activeSection) {
-      return;
-    }
-
-    const viewTop = window.scrollY;
-    const viewBottom = viewTop + window.innerHeight;
-    const sectionTop = activeSection.offsetTop;
-    const sectionBottom = sectionTop + activeSection.offsetHeight;
-
-    const distanceToTopEdge = Math.max(0, viewTop - sectionTop);
-    const distanceToBottomEdge = Math.max(0, sectionBottom - viewBottom);
-    const edgeDistance = direction > 0 ? distanceToBottomEdge : distanceToTopEdge;
-
-    const hasTargetSection =
-      (direction > 0 && currentIndex < this.navItems.length - 1) ||
-      (direction < 0 && currentIndex > 0);
-
-    if (!hasTargetSection) {
-      this.accumulatedWheel = 0;
-      this.lastWheelDirection = 0;
-      return;
-    }
-
-    if (edgeDistance > this.edgeActivationPx) {
-      this.accumulatedWheel = 0;
-      this.lastWheelDirection = 0;
-      return;
-    }
-
-    event.preventDefault();
-
-    if (this.lastWheelDirection !== 0 && this.lastWheelDirection !== direction) {
-      this.accumulatedWheel = 0;
-    }
-
-    this.lastWheelDirection = direction;
-    const dynamicThreshold = this.getDynamicEdgeThreshold(edgeDistance);
-
-    this.accumulatedWheel += event.deltaY;
-
-    if (this.accumulatedWheel > dynamicThreshold) {
-      this.accumulatedWheel = 0;
-      this.lastWheelDirection = 0;
-      this.snapToRelativeSection(1);
-      return;
-    }
-
-    if (this.accumulatedWheel < -dynamicThreshold) {
-      this.accumulatedWheel = 0;
-      this.lastWheelDirection = 0;
-      this.snapToRelativeSection(-1);
-    }
-  };
-
   scrollToSection(sectionId: SectionId): void {
     const element = document.getElementById(sectionId);
-    this.beginSectionScrollLock();
     element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -607,58 +517,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seedSparks();
   };
 
-  private snapToRelativeSection(direction: 1 | -1): void {
-    const current = this.getCurrentSectionIndex();
-    const target = Math.max(0, Math.min(current + direction, this.navItems.length - 1));
-
-    if (target === current) {
-      return;
-    }
-
-    this.snapToSection(target, direction);
-  }
-
-  private snapToSection(index: number, direction?: 1 | -1): void {
-    const target = this.navItems[index];
-    if (!target) {
-      return;
-    }
-
-    const element = document.getElementById(target.id);
-    if (!element) {
-      return;
-    }
-
-    this.activeSection = target.id;
-    this.beginSectionScrollLock();
-    // When scrolling up (direction = -1), start from the bottom of the section
-    const block = direction === -1 ? 'end' : 'start';
-    element.scrollIntoView({ behavior: 'smooth', block });
-  }
-
-  private getCurrentSectionIndex(): number {
-    const index = this.navItems.findIndex((item) => item.id === this.activeSection);
-    return index >= 0 ? index : 0;
-  }
-
-  private beginSectionScrollLock(): void {
-    this.isSectionScrolling = true;
-
-    if (this.sectionScrollUnlockHandle) {
-      clearTimeout(this.sectionScrollUnlockHandle);
-    }
-
-    this.sectionScrollUnlockHandle = setTimeout(() => {
-      this.isSectionScrolling = false;
-      this.sectionScrollUnlockHandle = null;
-    }, this.sectionScrollLockMs);
-  }
-
-  private getDynamicEdgeThreshold(edgeDistance: number): number {
-    const normalized = Math.max(0, Math.min(1, edgeDistance / this.edgeActivationPx));
-    const threshold = this.minEdgeThreshold + normalized * (this.wheelThreshold - this.minEdgeThreshold);
-    return Math.round(threshold);
-  }
 }
 
 interface NetworkNode {
