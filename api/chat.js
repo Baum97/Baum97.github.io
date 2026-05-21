@@ -4,10 +4,46 @@ const ALLOWED_ORIGINS = new Set([
   'http://localhost:4200'
 ]);
 
-const MODEL = 'gemini-2.5-flash';
+const MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash'];
 const MAX_OUTPUT_TOKENS = 600;
 const MAX_INPUT_CHARS = 4000;
 const MAX_HISTORY = 12;
+const RETRY_STATUSES = new Set([429, 500, 502, 503, 504]);
+
+async function callGemini(model, apiKey, body) {
+  const url =
+    'https://generativelanguage.googleapis.com/v1beta/models/' +
+    model +
+    ':generateContent?key=' +
+    encodeURIComponent(apiKey);
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+}
+
+async function callWithFallback(apiKey, body) {
+  let lastStatus = 503;
+  let lastDetail = '';
+  for (const model of MODELS) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const resp = await callGemini(model, apiKey, body);
+      if (resp.ok) {
+        return { ok: true, resp };
+      }
+      lastStatus = resp.status;
+      lastDetail = await resp.text();
+      if (!RETRY_STATUSES.has(resp.status)) {
+        return { ok: false, status: resp.status, detail: lastDetail };
+      }
+      if (attempt === 0) {
+        await new Promise((r) => setTimeout(r, 600));
+      }
+    }
+  }
+  return { ok: false, status: lastStatus, detail: lastDetail || 'All models unavailable' };
+}
 
 module.exports = async function handler(req, res) {
   try {
@@ -61,33 +97,23 @@ module.exports = async function handler(req, res) {
       parts: [{ text: m.content }]
     }));
 
-    const url =
-      'https://generativelanguage.googleapis.com/v1beta/models/' +
-      MODEL +
-      ':generateContent?key=' +
-      encodeURIComponent(apiKey);
+    const requestBody = {
+      systemInstruction: { parts: [{ text: buildSystemPrompt(lang) }] },
+      contents: geminiContents,
+      generationConfig: {
+        maxOutputTokens: MAX_OUTPUT_TOKENS,
+        temperature: 0.7,
+        topP: 0.95
+      }
+    };
 
-    const upstream = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: buildSystemPrompt(lang) }] },
-        contents: geminiContents,
-        generationConfig: {
-          maxOutputTokens: MAX_OUTPUT_TOKENS,
-          temperature: 0.7,
-          topP: 0.95
-        }
-      })
-    });
-
-    if (!upstream.ok) {
-      const detail = await upstream.text();
-      res.status(upstream.status).json({ error: 'Upstream error', detail: detail.slice(0, 800) });
+    const result = await callWithFallback(apiKey, requestBody);
+    if (!result.ok) {
+      res.status(result.status).json({ error: 'Upstream error', detail: (result.detail || '').slice(0, 800) });
       return;
     }
 
-    const data = await upstream.json();
+    const data = await result.resp.json();
     const parts = (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
     const reply = parts.map((p) => (p && p.text) || '').join('\n').trim();
 
