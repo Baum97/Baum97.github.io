@@ -141,8 +141,20 @@ export class ChatbotComponent implements OnInit, OnDestroy, AfterViewChecked {
   private formatError(err: unknown): string {
     const e: any = err;
     const status = e?.status ?? '';
-    const upstream = e?.error?.error ?? e?.error?.detail ?? e?.message ?? '';
-    return [status && `HTTP ${status}`, upstream].filter(Boolean).join(' — ').slice(0, 300);
+    const body = e?.error;
+    let detail = '';
+    if (typeof body === 'string') {
+      detail = body;
+    } else if (body && typeof body === 'object') {
+      detail =
+        (typeof body.error === 'string' ? body.error : '') ||
+        (typeof body.detail === 'string' ? body.detail : '') ||
+        (typeof body.message === 'string' ? body.message : '') ||
+        JSON.stringify(body);
+    } else if (e?.message) {
+      detail = String(e.message);
+    }
+    return [status && `HTTP ${status}`, detail].filter(Boolean).join(' — ').slice(0, 500);
   }
 
   private buildGreeting(lang: Lang): ChatMessage {
