@@ -9,6 +9,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { track } from '@vercel/analytics';
 import { ChatMessage, ChatService } from '../../core/chat/chat.service';
 import { LanguageService } from '../../core/i18n/language.service';
 import { Lang } from '../../core/i18n/translations';
@@ -122,12 +123,15 @@ export class ChatbotComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.shouldScroll = true;
     this.cdr.markForCheck();
 
+    track('chat_message', { lang: this.lang });
+
     this.chat.sendMessage(this.messages, this.lang).subscribe({
       next: (reply) => {
         this.messages = [...this.messages, { role: 'assistant', content: reply }];
         this.isSending = false;
         this.shouldScroll = true;
         this.cdr.markForCheck();
+        track('chat_reply', { lang: this.lang });
       },
       error: (err) => {
         this.isSending = false;
