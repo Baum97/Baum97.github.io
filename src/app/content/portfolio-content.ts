@@ -5,7 +5,7 @@ import { PortfolioContent } from '../shared/models/portfolio-content.model';
 export const PORTFOLIO_CONTENT_EN: PortfolioContent = {
   person: {
     name: 'Achim Baumgaertner',
-    role: 'Software Engineer',
+    role: 'Software Engineer | Data Scientist',
     intro: 'I build practical high quality software products with Angular, TypeScript, Java, Python, C# and clean architecture, with a focus on maintainability and measurable delivery impact.',
     location: 'Stuttgart Region, Germany • Open to relocation',
     availability: 'Open to software engineering opportunities',

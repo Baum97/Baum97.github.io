@@ -3,7 +3,7 @@ export type Lang = 'de' | 'en';
 export const SUPPORTED_LANGS: Lang[] = ['de', 'en'];
 
 export const UI_TEXT: Record<string, Record<Lang, string>> = {
-  hi_i_am: { en: 'Hi, I am:', de: 'Hallo, ich bin:' },
+  hi_i_am: { en: 'Hi, I am:', de: 'Hi, ich bin:' },
   intro: { en: 'Intro', de: 'Intro' },
   displayed_work: { en: 'Displayed Work', de: 'Projekte' },
   projects_kicker: { en: 'Projects', de: 'Projekte' },
