@@ -94,7 +94,7 @@ export const PORTFOLIO_CONTENT_EN: PortfolioContent = {
 export const PORTFOLIO_CONTENT_DE: PortfolioContent = {
   person: {
     name: 'Achim Baumgärtner',
-    role: 'Software Engineer',
+    role: 'Software Engineer | Data Scientist',
     intro: 'Entwicklung von praxistauglichen, hochwertigen Softwareprodukten mit Angular, TypeScript, Java, Python, C# und sauberer Architektur — mit Fokus auf Wartbarkeit und messbarem Lieferwert.',
     location: 'Region Stuttgart, Deutschland • Umzugsbereit',
     availability: 'Offen für Software-Engineering-Möglichkeiten',
